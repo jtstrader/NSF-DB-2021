@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.sql.Date;
 
-@Entity(name="CS2020CensusComplete")
+@Entity(name="CSSubject")
 public class Monkey {
     @Id
     String AnimalId;
