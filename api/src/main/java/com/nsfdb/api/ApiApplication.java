@@ -1,13 +1,13 @@
-package com.nsf.nsfdbapi;
+package com.nsfdb.api;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class NsfdbapiApplication {
+public class ApiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(NsfdbapiApplication.class, args);
+		SpringApplication.run(ApiApplication.class, args);
 	}
 
 }
