@@ -1,10 +1,10 @@
-package com.nsf.nsfdbapi;
+package com.nsfdb.api;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class NsfdbapiApplicationTests {
+class ApiApplicationTests {
 
 	@Test
 	void contextLoads() {
