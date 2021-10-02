@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionAdapter;
 
 public class MonkeyDetailsPanel extends JPanel {
     public MonkeyDetailsPanel() {
@@ -14,7 +15,7 @@ public class MonkeyDetailsPanel extends JPanel {
 
         String id = "Animal ID";
         String birth = "Date of Birth";
-        String death = "Date of Death";
+        String death = null;
         String gender = "Gender";
         String momId = "Mom";
         String status = "Status";
@@ -32,9 +33,11 @@ public class MonkeyDetailsPanel extends JPanel {
         this.add(birthLabel);
 
         // Creates label to display the Date of Death
-        JLabel deathLabel = new JLabel(death);
-        deathLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.add(deathLabel);
+        if (death != null) {
+            JLabel deathLabel = new JLabel(death);
+            deathLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+            this.add(deathLabel);
+        }
 
         // Creates label to display the Gender
         JLabel genderLabel = new JLabel(gender);
@@ -48,6 +51,17 @@ public class MonkeyDetailsPanel extends JPanel {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                System.out.println("Mom Clicked");
+            }
+        });
+        // Changes mouse cursor on hover.
+        momLabel.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseMoved(MouseEvent e) {
+                super.mouseMoved(e);
+                momLabel.setCursor(Cursor.getPredefinedCursor(
+                                    Cursor.HAND_CURSOR));
+
             }
         });
         this.add(momLabel);
@@ -56,7 +70,6 @@ public class MonkeyDetailsPanel extends JPanel {
         JLabel statusLabel = new JLabel(status);
         statusLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         this.add(statusLabel);
-
 
     }
 }
