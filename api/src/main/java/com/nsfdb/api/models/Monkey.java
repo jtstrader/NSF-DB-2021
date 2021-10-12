@@ -27,7 +27,7 @@ public class Monkey {
     Float age_of_remove;
     Float age_of_death;
     String sire_genetic;
-    String dire_genetic;
+    //String dire_genetic;
 
     public Monkey() {
 
@@ -169,11 +169,11 @@ public class Monkey {
         this.sire_genetic = sire_genetic;
     }
 
-    public String getDire_genetic() {
-        return dire_genetic;
-    }
+    //public String getDire_genetic() {
+    //    return dire_genetic;
+    //}
 
-    public void setDire_genetic(String dire_genetic) {
-        this.dire_genetic = dire_genetic;
-    }
+    //public void setDire_genetic(String dire_genetic) {
+    //    this.dire_genetic = dire_genetic;
+    //}
 }
