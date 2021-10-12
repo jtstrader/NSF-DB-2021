@@ -1,14 +1,17 @@
 package com.nsfdb.api.models;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.sql.Date;
 
 @Entity(name="CSSubject")
 public class Monkey {
     @Id
-    String AnimalId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     Integer SequenceNo;
+    String AnimalId;
     Date DateOfBirth;
     Integer MonthDOB;
     Integer YearDOB;

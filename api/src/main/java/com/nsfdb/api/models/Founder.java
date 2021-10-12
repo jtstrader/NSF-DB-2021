@@ -7,8 +7,8 @@ import java.sql.Date;
 @Entity(name="CSFounders")
 public class Founder {
     @Id
+    String MCode;
     String Tattoo;
-    String Mcode;
     Integer BirthSeason;
     Date DateOfBirth;
 
@@ -24,12 +24,12 @@ public class Founder {
         Tattoo = tattoo;
     }
 
-    public String getMcode() {
-        return Mcode;
+    public String getMCode() {
+        return MCode;
     }
 
-    public void setMcode(String mcode) {
-        Mcode = mcode;
+    public void setMCode(String mCode) {
+        MCode = mCode;
     }
 
     public Integer getBirthSeason() {
