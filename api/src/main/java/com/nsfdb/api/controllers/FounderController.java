@@ -18,8 +18,8 @@ public class FounderController {
     public List<Founder> list() { return founderRepository.findAll(); }
 
     @GetMapping
-    @RequestMapping({"Tattoo"})
-    public Founder get(@PathVariable String Tattoo){ return founderRepository.getById(Tattoo); }
+    @RequestMapping("{m_code}")
+    public Founder get(@PathVariable String m_code){ return founderRepository.getById(m_code); }
 
     @PostMapping
     public Founder create(@RequestBody final Founder founder) { return founderRepository.saveAndFlush(founder); }

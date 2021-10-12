@@ -19,9 +19,9 @@ public class MonkeyController {
     }
 
     @GetMapping
-    @RequestMapping("{AnimalId}")
-    public Monkey get(@PathVariable String AnimalId) {
-        return monkeyRepository.getById(AnimalId);
+    @RequestMapping("{animal_id}")
+    public Monkey get(@PathVariable String animal_id) {
+        return monkeyRepository.getById(animal_id);
     }
 
     @PostMapping
