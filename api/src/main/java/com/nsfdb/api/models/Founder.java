@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.sql.Date;
 
-@Entity(name="CSFounders")
+@Entity(name="CSFounder")
 public class Founder {
     @Id
     String MCode;
