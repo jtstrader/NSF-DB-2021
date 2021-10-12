@@ -7,44 +7,44 @@ import java.sql.Date;
 @Entity(name="CSFounder")
 public class Founder {
     @Id
-    String MCode;
-    String Tattoo;
-    Integer BirthSeason;
-    Date DateOfBirth;
+    String m_code;
+    String tattoo;
+    Integer birth_season;
+    Date date_of_birth;
 
     public Founder(){
 
     }
 
+    public String getM_code() {
+        return m_code;
+    }
+
+    public void setM_code(String m_code) {
+        this.m_code = m_code;
+    }
+
     public String getTattoo() {
-        return Tattoo;
+        return tattoo;
     }
 
     public void setTattoo(String tattoo) {
-        Tattoo = tattoo;
+        this.tattoo = tattoo;
     }
 
-    public String getMCode() {
-        return MCode;
+    public Integer getBirth_season() {
+        return birth_season;
     }
 
-    public void setMCode(String mCode) {
-        MCode = mCode;
+    public void setBirth_season(Integer birth_season) {
+        this.birth_season = birth_season;
     }
 
-    public Integer getBirthSeason() {
-        return BirthSeason;
+    public Date getDate_of_birth() {
+        return date_of_birth;
     }
 
-    public void setBirthSeason(Integer birthSeason) {
-        BirthSeason = birthSeason;
-    }
-
-    public Date getDateOfBirth() {
-        return DateOfBirth;
-    }
-
-    public void setDateOfBirth(Date dateOfBirth) {
-        DateOfBirth = dateOfBirth;
+    public void setDate_of_birth(Date date_of_birth) {
+        this.date_of_birth = date_of_birth;
     }
 }

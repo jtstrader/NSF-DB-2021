@@ -10,170 +10,170 @@ import java.sql.Date;
 public class Monkey {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer SequenceNo;
-    String AnimalId;
-    Date DateOfBirth;
-    Integer MonthDOB;
-    Integer YearDOB;
-    Character Sex;
-    String BirthGroup;
-    String BehaviourMom;
-    String CurrentGroup;
-    Integer BirthSeason;
-    String Status;
-    Date DateOfDeath;
-    Date DateOfRemove;
-    Float AgeOfDelivery;
-    Date MomDOB;
-    Float AgeOfDOD;
-    String SireGenetic;
-    String DamGenetic;
+    Integer sequence_id;
+    String animal_id;
+    Date date_of_birth;
+    Integer birth_season;
+    Character sex;
+    String birth_group;
+    String behavior_mom;
+    String current_group;
+    String status;
+    Date date_of_death;
+    Date date_of_remove;
+    Float age_of_delivery;
+    String dam_genetic;
+    Date mom_dob;
+    Float age_of_remove;
+    Float age_of_death;
+    String sire_genetic;
+    String dire_genetic;
 
     public Monkey() {
 
     }
 
-    public String getAnimalId() {
-        return AnimalId;
+    public Integer getSequence_id() {
+        return sequence_id;
     }
 
-    public void setAnimalId(String animalId) {
-        AnimalId = animalId;
+    public void setSequence_id(Integer sequence_id) {
+        this.sequence_id = sequence_id;
     }
 
-    public Integer getSequenceNo() {
-        return SequenceNo;
+    public String getAnimal_id() {
+        return animal_id;
     }
 
-    public void setSequenceNo(Integer sequenceNo) {
-        SequenceNo = sequenceNo;
+    public void setAnimal_id(String animal_id) {
+        this.animal_id = animal_id;
     }
 
-    public Date getDateOfBirth() {
-        return DateOfBirth;
+    public Date getDate_of_birth() {
+        return date_of_birth;
     }
 
-    public void setDateOfBirth(Date dateOfBirth) {
-        DateOfBirth = dateOfBirth;
+    public void setDate_of_birth(Date date_of_birth) {
+        this.date_of_birth = date_of_birth;
     }
 
-    public Integer getMonthDOB() {
-        return MonthDOB;
+    public Integer getBirth_season() {
+        return birth_season;
     }
 
-    public void setMonthDOB(Integer monthDOB) {
-        MonthDOB = monthDOB;
-    }
-
-    public Integer getYearDOB() {
-        return YearDOB;
-    }
-
-    public void setYearDOB(Integer yearDOB) {
-        YearDOB = yearDOB;
+    public void setBirth_season(Integer birth_season) {
+        this.birth_season = birth_season;
     }
 
     public Character getSex() {
-        return Sex;
+        return sex;
     }
 
     public void setSex(Character sex) {
-        Sex = sex;
+        this.sex = sex;
     }
 
-    public String getBirthGroup() {
-        return BirthGroup;
+    public String getBirth_group() {
+        return birth_group;
     }
 
-    public void setBirthGroup(String birthGroup) {
-        BirthGroup = birthGroup;
+    public void setBirth_group(String birth_group) {
+        this.birth_group = birth_group;
     }
 
-    public String getBehaviourMom() {
-        return BehaviourMom;
+    public String getBehavior_mom() {
+        return behavior_mom;
     }
 
-    public void setBehaviourMom(String behaviourMom) {
-        BehaviourMom = behaviourMom;
+    public void setBehavior_mom(String behavior_mom) {
+        this.behavior_mom = behavior_mom;
     }
 
-    public String getCurrentGroup() {
-        return CurrentGroup;
+    public String getCurrent_group() {
+        return current_group;
     }
 
-    public void setCurrentGroup(String currentGroup) {
-        CurrentGroup = currentGroup;
-    }
-
-    public Integer getBirthSeason() {
-        return BirthSeason;
-    }
-
-    public void setBirthSeason(Integer birthSeason) {
-        BirthSeason = birthSeason;
+    public void setCurrent_group(String current_group) {
+        this.current_group = current_group;
     }
 
     public String getStatus() {
-        return Status;
+        return status;
     }
 
     public void setStatus(String status) {
-        Status = status;
+        this.status = status;
     }
 
-    public Date getDateOfDeath() {
-        return DateOfDeath;
+    public Date getDate_of_death() {
+        return date_of_death;
     }
 
-    public void setDateOfDeath(Date dateOfDeath) {
-        DateOfDeath = dateOfDeath;
+    public void setDate_of_death(Date date_of_death) {
+        this.date_of_death = date_of_death;
     }
 
-    public Date getDateOfRemove() {
-        return DateOfRemove;
+    public Date getDate_of_remove() {
+        return date_of_remove;
     }
 
-    public void setDateOfRemove(Date dateOfRemove) {
-        DateOfRemove = dateOfRemove;
+    public void setDate_of_remove(Date date_of_remove) {
+        this.date_of_remove = date_of_remove;
     }
 
-    public Float getAgeOfDelivery() {
-        return AgeOfDelivery;
+    public Float getAge_of_delivery() {
+        return age_of_delivery;
     }
 
-    public void setAgeOfDelivery(Float ageOfDelivery) {
-        AgeOfDelivery = ageOfDelivery;
+    public void setAge_of_delivery(Float age_of_delivery) {
+        this.age_of_delivery = age_of_delivery;
     }
 
-    public Date getMomDOB() {
-        return MomDOB;
+    public String getDam_genetic() {
+        return dam_genetic;
     }
 
-    public void setMomDOB(Date momDOB) {
-        MomDOB = momDOB;
+    public void setDam_genetic(String dam_genetic) {
+        this.dam_genetic = dam_genetic;
     }
 
-    public Float getAgeOfDOD() {
-        return AgeOfDOD;
+    public Date getMom_dob() {
+        return mom_dob;
     }
 
-    public void setAgeOfDOD(Float ageOfDOD) {
-        AgeOfDOD = ageOfDOD;
+    public void setMom_dob(Date mom_dob) {
+        this.mom_dob = mom_dob;
     }
 
-    public String getSireGenetic() {
-        return SireGenetic;
+    public Float getAge_of_remove() {
+        return age_of_remove;
     }
 
-    public void setSireGenetic(String sireGenetic) {
-        SireGenetic = sireGenetic;
+    public void setAge_of_remove(Float age_of_remove) {
+        this.age_of_remove = age_of_remove;
     }
 
-    public String getDamGenetic() {
-        return DamGenetic;
+    public Float getAge_of_death() {
+        return age_of_death;
     }
 
-    public void setDamGenetic(String damGenetic) {
-        DamGenetic = damGenetic;
+    public void setAge_of_death(Float age_of_death) {
+        this.age_of_death = age_of_death;
+    }
+
+    public String getSire_genetic() {
+        return sire_genetic;
+    }
+
+    public void setSire_genetic(String sire_genetic) {
+        this.sire_genetic = sire_genetic;
+    }
+
+    public String getDire_genetic() {
+        return dire_genetic;
+    }
+
+    public void setDire_genetic(String dire_genetic) {
+        this.dire_genetic = dire_genetic;
     }
 }
