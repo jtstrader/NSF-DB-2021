@@ -5,7 +5,7 @@
 
 USE NSF_480
 GO
-EXEC sp_rename 'CSSubject.SequenceNo', 'sequence_no', 'COLUMN';
+EXEC sp_rename 'CSSubject.SequenceNo', 'sequence_id', 'COLUMN';
 EXEC sp_rename 'CSSubject.AnimalId', 'animal_id', 'COLUMN';
 EXEC sp_rename 'CSSubject.DateOfBirth', 'date_of_birth', 'COLUMN';
 EXEC sp_rename 'CSSubject.MonthDOB', 'month_dob', 'COLUMN';
