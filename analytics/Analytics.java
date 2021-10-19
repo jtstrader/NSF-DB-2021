@@ -29,6 +29,8 @@ public class Analytics {
 
         this.familytree = new FamilyTree(dbName, "CSRhesusSubject", "1");
         this.monkeyList = this.familytree.getMonkeyList();
+        RestClient client = new RestClient();
+        String monkeyJson = client.get("api/monkey");
     }
 
     public List<String> getMonkeySubjectIds() {
