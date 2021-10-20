@@ -1,0 +1,10 @@
+public static void main(String[] args) throws JsonProcessingException {
+		RestClient client = new RestClient("http://localhost:8080/");
+		ObjectMapper mapper = new ObjectMapper();
+		String monkeyJson = client.get("api/monkey");
+		ArrayList<Monkey> monkeys = mapper.readValue(monkeyJson, new TypeReference<ArrayList<Monkey>>(){});
+		for(int i = 0; i < monkeys.size(); i++)
+		{
+			System.out.println(monkeys.get(i).getAnimal_id());
+		}
+	}

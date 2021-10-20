@@ -49,3 +49,31 @@ To get the local database started, you first need to set up a proper login on th
     ```
 
 5. Everything should be good to go! You can now run your application :D
+
+# Database Refactoring
+The AWS Database (our server) is very slow and the GUI in SSMS (SQL Server Management Studio) is very slow because of this. It is a good idea to use queries as much as possible to speed up any process you wish to carry out on the server. In this directory is a C++ program specifically build to generate queries to refactor columns in a table, piped out to a file titled  rename_cols_query.sql (make sure not to overwrite your files!)
+
+### Bash
+```bash
+c++ rename_col_builder.cpp
+./a.out
+```
+
+### Powershell
+```powershell
+c++ rename_col_builder.cpp
+./a.exe
+```
+
+The program will prompt you to enter the table you wish to manipulate, and then the column name you wish to change and what you wish to change it to. In your query editor in SSMS, make sure you define what database you are **using** and then put the `GO` keyword to group your SQL commands into a single batch to send to the server at once. Copy paste the results of the C++ program under this and it should like this:
+
+```sql
+USE [MY_DATABASE]
+GO
+
+-- paste code here, should look like:
+EXEC sp_rename 'MYTABLE.col_old_name1', 'col_new_name1', 'COLUMN';
+EXEC sp_rename 'MYTABLE.col_old_name2', 'col_new_name2', 'COLUMN';
+EXEC sp_rename 'MYTABLE.col_old_name3', 'col_new_name3', 'COLUMN';
+EXEC sp_rename 'MYTABLE.col_old_name4', 'col_new_name4', 'COLUMN';
+```
