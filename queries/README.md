@@ -77,3 +77,7 @@ EXEC sp_rename 'MYTABLE.col_old_name2', 'col_new_name2', 'COLUMN';
 EXEC sp_rename 'MYTABLE.col_old_name3', 'col_new_name3', 'COLUMN';
 EXEC sp_rename 'MYTABLE.col_old_name4', 'col_new_name4', 'COLUMN';
 ```
+
+# Query Definitions
+ - **init.sql**: the "database maker." Completely generates the database, as well as all columns for every table w/ their respective information.
+ - **cssfi.sql**: CSSubjectFamilyInfo table creator. Specifically created to avoid having to use the .csv format again for importing, as the values from the .csv are always imported by default as varchar(50) types which is against specifications.
