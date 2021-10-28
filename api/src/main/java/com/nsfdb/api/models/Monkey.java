@@ -30,7 +30,9 @@ public class Monkey {
     Float age_of_remove;
     Float age_of_death;
     String sire_genetic;
-    //String dire_genetic;
+    Integer pedigree;
+    Integer sibling_no;
+    String matriarch;
 
     public Monkey() {
 
@@ -172,11 +174,27 @@ public class Monkey {
         this.sire_genetic = sire_genetic;
     }
 
-    //public String getDire_genetic() {
-    //    return dire_genetic;
-    //}
+    public Integer getPedigree() {
+        return pedigree;
+    }
 
-    //public void setDire_genetic(String dire_genetic) {
-    //    this.dire_genetic = dire_genetic;
-    //}
+    public void setPedigree(Integer pedigree) {
+        this.pedigree = pedigree;
+    }
+
+    public Integer getSibling_no() {
+        return sibling_no;
+    }
+
+    public void setSibling_no(Integer sibling_no) {
+        this.sibling_no = sibling_no;
+    }
+
+    public String getMatriarch() {
+        return matriarch;
+    }
+
+    public void setMatriarch(String matriarch) {
+        this.matriarch = matriarch;
+    }
 }
