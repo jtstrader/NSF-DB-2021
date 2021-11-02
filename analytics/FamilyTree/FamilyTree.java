@@ -17,16 +17,19 @@ import java.util.stream.Collectors;
 import java.sql.Statement;
 import com.nsfdb.application.analytics.SqlServerDbAccessor;
 import com.nsfdb.application.analytics.FamilyTree.*;
+import com.nsfdb.api.*;
 
 public class FamilyTree {
-    private MonkeyNode root;
-    private List<MonkeyNode> MonkeyList;
+    private Monkey root;
+    private List<Monkey> MonkeyList;
+    private RestClient client;
 
     public FamilyTree( String dbName, String table, String rootId )
     {
-        SqlServerDbAccessor dba = new SqlServerDbAccessor("csdata.cd4sevot432y.us-east-1.rds.amazonaws.com", "administrator", "MercerBear$2020", "CayoSantiagoRhesusDB");
-        dba.setDbName(dbName);
-        dba.connectToDb();
+        //SqlServerDbAccessor dba = new SqlServerDbAccessor("csdata.cd4sevot432y.us-east-1.rds.amazonaws.com", "administrator", "MercerBear$2020", "CayoSantiagoRhesusDB");
+        //dba.setDbName(dbName);
+        //dba.connectToDb();
+        client = new RestClient("http://localhost:8080");
 
         this.root = new MonkeyNode(dba, table, rootId);
         this.MonkeyList = getAllMonkeys(this.root);

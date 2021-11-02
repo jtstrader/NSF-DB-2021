@@ -1,10 +1,13 @@
 package com.nsfdb.api.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.sql.Date;
 
 @Entity(name="CSFounder")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Founder {
     @Id
     String m_code;

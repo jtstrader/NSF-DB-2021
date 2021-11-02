@@ -11,24 +11,28 @@
 package com.nsfdb.application.analytics;
 
 import com.nsfdb.application.analytics.FamilyTree.*;
+import com.nsfdb.api.models;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
 public class Analytics {
-    private SqlServerDbAccessor dba;
+    //private SqlServerDbAccessor dba;
     private FamilyTree familytree;
-    private List<MonkeyNode> monkeyList;
+    private List<Monkey> monkeyList;
 
     public Analytics( String dbName )
     {
-        this.dba = new SqlServerDbAccessor();
-        this.dba.setDbName(dbName);
-        this.dba.getConnection();
+        //this.dba = new SqlServerDbAccessor();
+        //this.dba.setDbName(dbName);
+        //this.dba.getConnection();
 
         this.familytree = new FamilyTree(dbName, "CSRhesusSubject", "1");
         this.monkeyList = this.familytree.getMonkeyList();
+        RestClient client = new RestClient("http://localhost:8080/");
+        String monkeyJson = client.get("api/monkey");
+        this.monkeyList = mapper.readValue(monkeyJson, new TypeReference<ArrayList<Monkey>>(){});
     }
 
     public List<String> getMonkeySubjectIds() {
