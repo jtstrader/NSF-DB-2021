@@ -20,7 +20,7 @@ public class FamilyTree {
         private List<Monkey> founders = client.get("api/founder");
 
         for(int i = 0, i < founders.size(), i++){
-            MonkeyList.add(founders.get(i));
+            MonkeyList.add(founderToMonkey(founders.get(i)));
             addChain(founders.get(i).tattoo);
         }
 
@@ -37,6 +37,17 @@ public class FamilyTree {
             MonkeyList.add(children.get(i))
             addChain(children.get(i).animalid);
         }
+    }
 
+    private founderToMonkey(founder monk){
+        Monkey newMonkey = new Monkey();
+
+        newMonkey.animalID = monk.tattoo;
+        newMonkey.birth_season = monk.birth_season;
+        newMonkey.date_of_birth = monk.date_of_birth;
+        newMonkey.pegidree = 1;
+        newMonkey.sex = 'F';
+
+        return newMonkey;
     }
 }
