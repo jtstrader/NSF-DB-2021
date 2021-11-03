@@ -28,7 +28,7 @@ public class FamilyTree {
     }
 
     private addChain(string behavior_mom){
-        private List<Monkey> children = client.get("api/monkey/" + behavior_mom);
+        private List<Monkey> children = client.get("api/monkey/mom/" + behavior_mom);
         if(children.size() == 0){
             break;
         }
