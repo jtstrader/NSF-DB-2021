@@ -1,5 +1,6 @@
 package com.nsfdb.analytics.FamilyTree;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -10,14 +11,16 @@ import com.nsfdb.api.*;
 public class FamilyTree {
     private List<Monkey> MonkeyList;
     private RestClient client;
+    private ObjectMapper mapper;
 
     public FamilyTree()
     {
         this.client = new RestClient("http://localhost:8080");
+        this.mapper = new ObjectMapper();
     }
 
     public create(){
-        private List<Monkey> founders = client.get("api/founder");
+        private List<Monkey> founders = mapper.readValue(client.get("api/founder"),new TypeReference<ArrayList<Founder>>(){});
 
         for(int i = 0, i < founders.size(), i++){
             MonkeyList.add(founderToMonkey(founders.get(i)));
@@ -28,7 +31,7 @@ public class FamilyTree {
     }
 
     private addChain(string behavior_mom){
-        private List<Monkey> children = client.get("api/monkey/mom/" + behavior_mom);
+        private List<Monkey> children = mapper.readValue(client.get("api/monkey/mom/" + behavior_mom),new TypeReference<ArrayList<Monkey>>(){});
         if(children.size() == 0){
             break;
         }
