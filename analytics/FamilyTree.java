@@ -30,8 +30,8 @@ public class FamilyTree {
         return MonkeyList;
     }
 
-    private addChain(string behavior_mom){
-        private List<Monkey> children = mapper.readValue(client.get("api/monkey/mom/" + behavior_mom),new TypeReference<ArrayList<Monkey>>(){});
+    private addChain(string matriarch){
+        private List<Monkey> children = mapper.readValue(client.get("api/monkey/mom/" +  matriarch),new TypeReference<ArrayList<Monkey>>(){});
         if(children.size() == 0){
             break;
         }
