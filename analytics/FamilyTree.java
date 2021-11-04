@@ -20,7 +20,7 @@ public class FamilyTree {
     }
 
     public create(){
-        private List<Monkey> founders = mapper.readValue(client.get("api/founder"),new TypeReference<ArrayList<Founder>>(){});
+        private List<Founder> founders = mapper.readValue(client.get("api/founder"),new TypeReference<List<Founder>>(){});
 
         for(int i = 0, i < founders.size(), i++){
             MonkeyList.add(founderToMonkey(founders.get(i)));
@@ -31,7 +31,7 @@ public class FamilyTree {
     }
 
     private addChain(string behavior_mom){
-        private List<Monkey> children = mapper.readValue(client.get("api/monkey/mom/" + behavior_mom),new TypeReference<ArrayList<Monkey>>(){});
+        private List<Monkey> children = mapper.readValue(client.get("api/monkey/mom/" + behavior_mom),new TypeReference<List<Monkey>>(){});
         if(children.size() == 0){
             break;
         }
