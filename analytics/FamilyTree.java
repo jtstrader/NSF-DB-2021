@@ -19,8 +19,8 @@ public class FamilyTree {
         this.mapper = new ObjectMapper();
     }
 
-    public create(){
-        private List<Monkey> founders = mapper.readValue(client.get("api/founder"),new TypeReference<ArrayList<Founder>>(){});
+    public List<Monkey> create(){
+        private List<Founder> founders = mapper.readValue(client.get("api/founder"),new TypeReference<ArrayList<Founder>>(){});
 
         for(int i = 0, i < founders.size(), i++){
             MonkeyList.add(founderToMonkey(founders.get(i)));
@@ -30,8 +30,8 @@ public class FamilyTree {
         return MonkeyList;
     }
 
-    private addChain(string behavior_mom){
-        private List<Founder> children = mapper.readValue(client.get("api/monkey/mom/" + behavior_mom),new TypeReference<ArrayList<Monkey>>(){});
+    private void addChain(string behavior_mom){
+        private List<Monkey> children = mapper.readValue(client.get("api/monkey/mom/" + behavior_mom),new TypeReference<ArrayList<Monkey>>(){});
         if(children.size() == 0){
             break;
         }
@@ -42,7 +42,7 @@ public class FamilyTree {
         }
     }
 
-    private founderToMonkey(founder monk){
+    private Monkey founderToMonkey(founder monk){
         Monkey newMonkey = new Monkey();
 
         newMonkey.animalID = monk.tattoo;
