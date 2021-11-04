@@ -31,7 +31,7 @@ public class FamilyTree {
     }
 
     private addChain(string behavior_mom){
-        private List<Monkey> children = mapper.readValue(client.get("api/monkey/mom/" + behavior_mom),new TypeReference<ArrayList<Monkey>>(){});
+        private List<Founder> children = mapper.readValue(client.get("api/monkey/mom/" + behavior_mom),new TypeReference<ArrayList<Monkey>>(){});
         if(children.size() == 0){
             break;
         }
