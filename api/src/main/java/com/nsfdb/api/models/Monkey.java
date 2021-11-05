@@ -19,7 +19,6 @@ public class Monkey {
     Integer birth_season;
     Character sex;
     String birth_group;
-    String behavior_mom;
     String current_group;
     String status;
     Date date_of_death;
@@ -84,14 +83,6 @@ public class Monkey {
 
     public void setBirth_group(String birth_group) {
         this.birth_group = birth_group;
-    }
-
-    public String getBehavior_mom() {
-        return behavior_mom;
-    }
-
-    public void setBehavior_mom(String behavior_mom) {
-        this.behavior_mom = behavior_mom;
     }
 
     public String getCurrent_group() {
