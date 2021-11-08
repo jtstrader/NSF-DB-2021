@@ -9,7 +9,7 @@ import com.nsfdb.analytics.FamilyTree.*;
 import com.nsfdb.api.*;
 
 public class FamilyTree {
-    private List<Monkey> MonkeyList;
+    private ArrayList<Monkey> MonkeyList;
     private RestClient client;
     private ObjectMapper mapper;
 
@@ -17,10 +17,11 @@ public class FamilyTree {
     {
         this.client = new RestClient("http://localhost:8080");
         this.mapper = new ObjectMapper();
+        this.MonkeyList = new ArrayList<Monkey>();
     }
 
-    public List<Monkey> create(){
-        private List<Founder> founders = mapper.readValue(client.get("api/founder"),new TypeReference<ArrayList<Founder>>(){});
+    public ArrayList<Monkey> create(){
+        private ArrayList<Founder> founders = mapper.readValue(client.get("api/founder"),new TypeReference<ArrayList<Founder>>(){});
 
         for(int i = 0, i < founders.size(), i++){
             MonkeyList.add(founderToMonkey(founders.get(i)));
@@ -31,9 +32,9 @@ public class FamilyTree {
     }
 
     private void addChain(string behavior_mom){
-        private List<Monkey> children = mapper.readValue(client.get("api/monkey/mom/" + behavior_mom),new TypeReference<ArrayList<Monkey>>(){});
+        private ArrayList<Monkey> children = mapper.readValue(client.get("api/monkey/mom/" + behavior_mom),new TypeReference<ArrayList<Monkey>>(){});
         if(children.size() == 0){
-            break;
+            return;
         }
 
         for(int i = 0; i < children.size(), i++){
