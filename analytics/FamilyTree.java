@@ -1,23 +1,27 @@
 package com.nsfdb.analytics.FamilyTree;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import com.nsfdb.analytics.FamilyTree.*;
-import com.nsfdb.api.*;
+import com.nsfdb.api.models;
 
 public class FamilyTree {
-    private List<Monkey> MonkeyList;
+    private ArrayList<Monkey> MonkeyList;
     private RestClient client;
+    private ObjectMapper mapper;
 
     public FamilyTree()
     {
         this.client = new RestClient("http://localhost:8080");
+        this.mapper = new ObjectMapper();
+        this.MonkeyList = new ArrayList<Monkey>();
     }
 
-    public create(){
-        private List<Monkey> founders = client.get("api/founder");
+    public ArrayList<Monkey> create(){
+        private ArrayList<Founder> founders = mapper.readValue(client.get("api/founder"),new TypeReference<ArrayList<Founder>>(){});
 
         for(int i = 0, i < founders.size(), i++){
             MonkeyList.add(founderToMonkey(founders.get(i)));
@@ -27,10 +31,10 @@ public class FamilyTree {
         return MonkeyList;
     }
 
-    private addChain(string behavior_mom){
-        private List<Monkey> children = client.get("api/monkey/" + behavior_mom);
+    private void addChain(string behavior_mom){
+        private ArrayList<Monkey> children = mapper.readValue(client.get("api/monkey/mom/" + behavior_mom),new TypeReference<ArrayList<Monkey>>(){});
         if(children.size() == 0){
-            break;
+            return;
         }
 
         for(int i = 0; i < children.size(), i++){
@@ -39,7 +43,7 @@ public class FamilyTree {
         }
     }
 
-    private founderToMonkey(founder monk){
+    private Monkey founderToMonkey(founder monk){
         Monkey newMonkey = new Monkey();
 
         newMonkey.animalID = monk.tattoo;

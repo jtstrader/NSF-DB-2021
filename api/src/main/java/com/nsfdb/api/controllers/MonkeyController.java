@@ -24,6 +24,10 @@ public class MonkeyController {
         return monkeyRepository.getById(sequence_id);
     }
 
+    @GetMapping
+    @RequestMapping("mom/{behavior_mom}")
+    public List<Monkey> getChildren(@PathVariable String behavior_mom) { return monkeyRepository.getChildren(behavior_mom); }
+
     @PostMapping
     public Monkey create(@RequestBody final Monkey monkey) {
         return monkeyRepository.saveAndFlush(monkey);
