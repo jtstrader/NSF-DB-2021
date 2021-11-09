@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 import com.nsfdb.analytics.FamilyTree.*;
-import com.nsfdb.api.*;
+import com.nsfdb.api.models;
 
 public class FamilyTree {
     private ArrayList<Monkey> MonkeyList;
