@@ -13,25 +13,25 @@ import java.sql.Date;
 public class Monkey {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer sequence_id;
-    String animal_id;
-    Date date_of_birth;
-    Integer birth_season;
-    Character sex;
-    String birth_group;
-    String current_group;
-    String status;
-    Date date_of_death;
-    Date date_of_remove;
-    Float age_of_delivery;
-    String dam_genetic;
-    Date mom_dob;
-    Float age_of_remove;
-    Float age_of_death;
-    String sire_genetic;
-    Integer pedigree;
-    Integer sibling_no;
-    String matriarch;
+    public Integer sequence_id;
+    public String animal_id;
+    public Date date_of_birth;
+    public Integer birth_season;
+    public Character sex;
+    public String birth_group;
+    public String current_group;
+    public String status;
+    public Date date_of_death;
+    public Date date_of_remove;
+    public Float age_of_delivery;
+    public String dam_genetic;
+    public Date mom_dob;
+    public Float age_of_remove;
+    public Float age_of_death;
+    public String sire_genetic;
+    public Integer pedigree;
+    public Integer sibling_no;
+    public String matriarch;
 
     public Monkey() {
 
