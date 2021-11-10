@@ -13,6 +13,15 @@ public class FamilyTree {
     private final RestClient client;
     private final ObjectMapper mapper;
 
+    /*
+    // potential fix: sibling/child tree
+    class FamilyTreeNode {
+        Monkey monkey;
+        FamilyTreeNode sibling;
+        FamilyTree child;
+    }
+    */
+
     public FamilyTree()
     {
         this.client = new RestClient("http://localhost:8080");
@@ -33,7 +42,7 @@ public class FamilyTree {
     It will do this process for all Founders and Monkeys.
  */
     public void create() throws JsonProcessingException {
-        ArrayList<Founder> founders = mapper.readValue(client.get("api/founder"),new TypeReference<ArrayList<Founder>>(){});
+        ArrayList<Founder> founders = mapper.readValue(client.get("/api/founder"),new TypeReference<ArrayList<Founder>>(){});
 
         for (Founder founder : founders) {
             MonkeyList.add(founderToMonkey(founder));
@@ -47,7 +56,7 @@ public class FamilyTree {
     that Monkey/Child to see if they have any Children.
  */
     private void addChain(String behavior_mom) throws JsonProcessingException {
-        ArrayList<Monkey> children = mapper.readValue(client.get("api/monkey/mom/" + behavior_mom),new TypeReference<ArrayList<Monkey>>(){});
+        ArrayList<Monkey> children = mapper.readValue(client.get("/api/monkey/mom/" + behavior_mom),new TypeReference<ArrayList<Monkey>>(){});
         if(children.size() == 0){
             return;
         }
