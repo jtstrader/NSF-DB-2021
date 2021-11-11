@@ -4,9 +4,13 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.ArrayList;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 import com.nsfdb.api.models.*;
 import com.nsfdb.api.analytics.RestClient;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.AsyncResult;
 
 public class FamilyTree {
     private final ArrayList<Monkey> MonkeyList;
@@ -41,12 +45,12 @@ public class FamilyTree {
     and then adding all of its children, with the addChain. Then it will move on to the next founder and repeat.
     It will do this process for all Founders and Monkeys.
  */
-    public void create() throws JsonProcessingException {
+    public void create() throws JsonProcessingException, ExecutionException, InterruptedException {
         ArrayList<Founder> founders = mapper.readValue(client.get("/api/founder"),new TypeReference<ArrayList<Founder>>(){});
 
         for (Founder founder : founders) {
             MonkeyList.add(founderToMonkey(founder));
-            addChain(founder.tattoo);
+            addChain(founder.getTattoo());
         }
     }
 /*
@@ -55,15 +59,23 @@ public class FamilyTree {
     If there are children then it will add them to the Main array List and then use the recursive call to check
     that Monkey/Child to see if they have any Children.
  */
-    private void addChain(String behavior_mom) throws JsonProcessingException {
-        ArrayList<Monkey> children = mapper.readValue(client.get("/api/monkey/mom/" + behavior_mom),new TypeReference<ArrayList<Monkey>>(){});
-        if(children.size() == 0){
-            return;
-        }
+    @Async
+    void addChain(String behavior_mom) throws JsonProcessingException, ExecutionException, InterruptedException {
+        System.out.println("-------------------------HERE-----------------------------");
+        //Future<ArrayList<Monkey>> childrenAsync = mapper.readValue(client.get("/api/monkey/momAsync/" + behavior_mom),new TypeReference<Future<ArrayList<Monkey>>>(){});
+        Future<String> AsyncPayload = new AsyncResult<String>(client.get("/api/monkey/momAsync/"+behavior_mom));
+        System.out.println("-------------------------HERE NOW-----------------------------");
+        if(AsyncPayload.isDone()) {
+            System.out.println(AsyncPayload.get());
+            ArrayList<Monkey> children = new ArrayList<Monkey>();
+            if (children.size() == 0) {
+                return;
+            }
 
-        for (Monkey child : children) {
-            MonkeyList.add(child);
-            addChain(child.animal_id);
+            for (Monkey child : children) {
+                MonkeyList.add(child);
+                addChain(child.getAnimal_id());
+            }
         }
     }
 /*
@@ -75,11 +87,11 @@ public class FamilyTree {
     private Monkey founderToMonkey(Founder monk){
         Monkey newMonkey = new Monkey();
 
-        newMonkey.animal_id = monk.tattoo;
-        newMonkey.birth_season = monk.birth_season;
-        newMonkey.date_of_birth = monk.date_of_birth;
-        newMonkey.pedigree = 1;
-        newMonkey.sex = 'F';
+        newMonkey.setAnimal_id(monk.getTattoo());
+        newMonkey.setBirth_season(monk.getBirth_season());
+        newMonkey.setDate_of_birth(monk.getDate_of_birth());
+        newMonkey.setPedigree(1);
+        newMonkey.setSex('F');
 
         return newMonkey;
     }

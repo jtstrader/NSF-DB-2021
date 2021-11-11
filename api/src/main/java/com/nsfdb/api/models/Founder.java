@@ -10,10 +10,10 @@ import java.sql.Date;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Founder {
     @Id
-    public String m_code;
-    public String tattoo;
-    public Integer birth_season;
-    public Date date_of_birth;
+    String m_code;
+    String tattoo;
+    Integer birth_season;
+    Date date_of_birth;
 
     public Founder(){
 
