@@ -93,7 +93,7 @@ public class FamilyTree {
 
         //List<Future<Void>> results = executor.invokeAll(callables);
         Monkey mon  = new Monkey();
-        mon.setAnimal_id("52Z");
+        mon.setAnimal_id("2I3");
         root[0] = new FamilyTreeNode(mon);
         addChain(root);
     }
@@ -163,11 +163,11 @@ public class FamilyTree {
     }
     private void printTree(FamilyTreeNode[] root) {
         System.out.println(root[0].monkey);
-        if(root[0].child[0] == null)
-            return;
-        printTree(root[0].child);
-        if(root[0].sibling[0] == null)
-            return;
-        printTree(root[0].sibling);
+        if(root[0].child[0] != null)
+            printTree(root[0].child);
+
+        if(root[0].sibling[0] != null)
+            printTree(root[0].sibling);
+        return;
     }
 }
