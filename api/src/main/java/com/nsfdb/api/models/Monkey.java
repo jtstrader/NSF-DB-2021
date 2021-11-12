@@ -188,4 +188,8 @@ public class Monkey {
     public void setBehavior_mom(String behavior_mom) {
         this.behavior_mom = behavior_mom;
     }
+
+    public String toString() {
+        return "sequence_id: " + sequence_id + " | behavior_mom: " + behavior_mom;
+    }
 }

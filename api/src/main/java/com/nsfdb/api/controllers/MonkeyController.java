@@ -29,22 +29,8 @@ public class MonkeyController {
     }
 
     @GetMapping
-    @RequestMapping("mom/{matriarch}")
-    public List<Monkey> getChildren(@PathVariable String matriarch) { return monkeyRepository.getChildren(matriarch); }
-
-    @GetMapping
-    @RequestMapping("momAsync/{matriarch}")
-    @Async
-    public Future<List<Monkey>> getChildrenAsync(@PathVariable String matriarch){
-        try {
-            return new AsyncResult<List<Monkey>>(monkeyRepository.getChildren(matriarch));
-        }
-        catch(Exception ex)
-        {
-            System.out.println(ex.getMessage());
-            return new AsyncResult<List<Monkey>>(new ArrayList<Monkey>());
-        }
-    }
+    @RequestMapping("mom/{behavior_mom}")
+    public List<Monkey> getChildren(@PathVariable String behavior_mom) { return monkeyRepository.getChildren(behavior_mom); }
 
     @PostMapping
     public Monkey create(@RequestBody final Monkey monkey) {
