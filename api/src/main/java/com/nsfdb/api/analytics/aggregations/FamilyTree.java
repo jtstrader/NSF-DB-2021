@@ -15,7 +15,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 
 public class FamilyTree {
-    private final ArrayList<Monkey> MonkeyList;
+    private final ArrayList<FamilyTreeNode> RootList;
     private final RestClient client;
     private final ObjectMapper mapper;
     private FamilyTreeNode[] root;
@@ -38,14 +38,14 @@ public class FamilyTree {
     {
         this.client = new RestClient("http://localhost:8080");
         this.mapper = new ObjectMapper();
-        this.MonkeyList = new ArrayList<Monkey>();
+        this.RootList = new ArrayList<FamilyTreeNode>();
         this.root = new FamilyTreeNode[1];
     }
 /*
     Return the generated monkey list to the user
 */
-    public ArrayList<Monkey> getMonkeyList() {
-        return this.MonkeyList;
+    public ArrayList<FamilyTreeNode> getMonkeyList() {
+        return this.RootList;
     }
 
     private Callable<Void> toCallable(final Runnable runnable) {
@@ -65,13 +65,21 @@ public class FamilyTree {
  */
     public void create() throws JsonProcessingException, ExecutionException, InterruptedException, TimeoutException {
         ArrayList<Founder> founders = mapper.readValue(client.get("/api/founder"),new TypeReference<ArrayList<Founder>>(){});
+        //ArrayList<FamilyTreeNode> roots = new ArrayList<FamilyTreeNode>();
+        for(Founder f: founders)
+        {
+            RootList.add(new FamilyTreeNode(founderToMonkey(f)));
+        }
+
         ExecutorService executor = Executors.newFixedThreadPool(founders.size());
         Collection<Runnable> runnables = new ArrayList<Runnable>();
         for(int i = 0; i < founders.size(); i++) {
             int x = i;
             runnables.add(() -> {
                 try {
+                    root[0] = RootList.get(x);
                     addChain(root);
+                    System.out.println("DONE WITH THIS ROOT");
                 } catch (JsonProcessingException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
@@ -85,17 +93,18 @@ public class FamilyTree {
         }
 
         // test is runnable list is populated with thread info
-        System.out.println("ArrayList<Runnable>.size(): " + runnables.size());
+        //System.out.println("ArrayList<Runnable>.size(): " + runnables.size());
 
         Collection<Callable<Void>> callables = new ArrayList<Callable<Void>>();
         for(Runnable r : runnables)
             callables.add(toCallable(r));
 
-        //List<Future<Void>> results = executor.invokeAll(callables);
-        Monkey mon  = new Monkey();
-        mon.setAnimal_id("2I3");
-        root[0] = new FamilyTreeNode(mon);
-        addChain(root);
+        List<Future<Void>> results = executor.invokeAll(callables);
+
+        //Monkey mon  = new Monkey();
+        //mon.setAnimal_id("2I3");
+        //root[0] = new FamilyTreeNode(mon);
+        //addChain(root);
     }
 
 /*
@@ -107,8 +116,10 @@ public class FamilyTree {
 
     void addChain(FamilyTreeNode[] ftn) throws JsonProcessingException, ExecutionException, InterruptedException, TimeoutException {
         counter++;
+        //System.out.println(counter);
         //client.getAsync("/api/monkey/mom/"+behavior_mom)
         //    .subscribe(monkey -> this.MonkeyList.add(monkey));
+        //System.out.println("==============IM HERE=============");
 
         ArrayList<Monkey> children = mapper.readValue(client.get("/api/monkey/mom/" + ftn[0].monkey.getAnimal_id()), new TypeReference<ArrayList<Monkey>>(){});
         if (children.size() == 0) {
@@ -122,7 +133,6 @@ public class FamilyTree {
         ftn[0].child[0] = new FamilyTreeNode(children.get(0));
         FamilyTreeNode[] temp = ftn[0].child;
         for (int i = 1; i < children.size(); i++) {
-            counter++;
             temp[0].sibling[0]  = new FamilyTreeNode(children.get(i));
             temp = temp[0].sibling;
         }

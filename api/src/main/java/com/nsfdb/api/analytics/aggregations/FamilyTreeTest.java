@@ -17,9 +17,9 @@ public class FamilyTreeTest {
         in.nextLine();
         FamilyTree myTree = new FamilyTree();
         myTree.create();
-        Thread.sleep(5000);
-        System.out.println("myTree.size(): " + myTree.counter);
-        myTree.printTree();
+        //Thread.sleep(60000);
+        //System.out.println("myTree.size(): " + myTree.counter);
+        //myTree.printTree();
 //        ArrayList<Monkey> monkeys = myTree.getMonkeyList();
     }
 }
