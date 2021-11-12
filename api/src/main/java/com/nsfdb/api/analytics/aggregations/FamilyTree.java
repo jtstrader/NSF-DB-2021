@@ -18,21 +18,28 @@ public class FamilyTree {
     private final ArrayList<Monkey> MonkeyList;
     private final RestClient client;
     private final ObjectMapper mapper;
+    private FamilyTreeNode[] root;
+    public int counter = 0;
 
-    /*
-    // potential fix: sibling/child tree
+    // n-tree
     class FamilyTreeNode {
         Monkey monkey;
-        FamilyTreeNode sibling;
-        FamilyTree child;
+        FamilyTreeNode[] sibling;
+        FamilyTreeNode[] child;
+
+        public FamilyTreeNode(Monkey monkey) {
+            this.monkey = monkey;
+            sibling = new FamilyTreeNode[1];
+            child = new FamilyTreeNode[1];
+        }
     }
-    */
 
     public FamilyTree()
     {
         this.client = new RestClient("http://localhost:8080");
         this.mapper = new ObjectMapper();
         this.MonkeyList = new ArrayList<Monkey>();
+        this.root = new FamilyTreeNode[1];
     }
 /*
     Return the generated monkey list to the user
@@ -64,8 +71,7 @@ public class FamilyTree {
             int x = i;
             runnables.add(() -> {
                 try {
-                    MonkeyList.add(founderToMonkey(founders.get(x)));
-                    addChain(founders.get(x).getTattoo());
+                    addChain(root);
                 } catch (JsonProcessingException e) {
                     e.printStackTrace();
                 } catch (ExecutionException e) {
@@ -85,7 +91,11 @@ public class FamilyTree {
         for(Runnable r : runnables)
             callables.add(toCallable(r));
 
-        List<Future<Void>> results = executor.invokeAll(callables);
+        //List<Future<Void>> results = executor.invokeAll(callables);
+        Monkey mon  = new Monkey();
+        mon.setAnimal_id("52Z");
+        root[0] = new FamilyTreeNode(mon);
+        addChain(root);
     }
 
 /*
@@ -95,17 +105,32 @@ public class FamilyTree {
     that Monkey/Child to see if they have any Children.
  */
 
-    void addChain(String behavior_mom) throws JsonProcessingException, ExecutionException, InterruptedException, TimeoutException {
-        client.getAsync("/api/monkey/mom/"+behavior_mom)
-            .subscribe(monkey -> this.MonkeyList.add(monkey));
-        ArrayList<Monkey> children = new ArrayList<Monkey>();
+    void addChain(FamilyTreeNode[] ftn) throws JsonProcessingException, ExecutionException, InterruptedException, TimeoutException {
+        counter++;
+        //client.getAsync("/api/monkey/mom/"+behavior_mom)
+        //    .subscribe(monkey -> this.MonkeyList.add(monkey));
+
+        ArrayList<Monkey> children = mapper.readValue(client.get("/api/monkey/mom/" + ftn[0].monkey.getAnimal_id()), new TypeReference<ArrayList<Monkey>>(){});
         if (children.size() == 0) {
             return;
         }
 
-        for (Monkey child : children) {
-            MonkeyList.add(child);
-            addChain(child.getAnimal_id());
+        // 1. create new node
+        // 2. set monkey information
+        // 3. recursively get children
+        // 4. recursively get siblings
+        ftn[0].child[0] = new FamilyTreeNode(children.get(0));
+        FamilyTreeNode[] temp = ftn[0].child;
+        for (int i = 1; i < children.size(); i++) {
+            counter++;
+            temp[0].sibling[0]  = new FamilyTreeNode(children.get(i));
+            temp = temp[0].sibling;
+        }
+
+        temp = ftn[0].child;
+        while(temp[0] != null) {
+            addChain(temp);
+            temp = temp[0].sibling;
         }
     }
 
@@ -131,5 +156,18 @@ public class FamilyTree {
         newMonkey.setSex('F');
 
         return newMonkey;
+    }
+
+    public void printTree() {
+        printTree(root);
+    }
+    private void printTree(FamilyTreeNode[] root) {
+        System.out.println(root[0].monkey);
+        if(root[0].child[0] == null)
+            return;
+        printTree(root[0].child);
+        if(root[0].sibling[0] == null)
+            return;
+        printTree(root[0].sibling);
     }
 }
