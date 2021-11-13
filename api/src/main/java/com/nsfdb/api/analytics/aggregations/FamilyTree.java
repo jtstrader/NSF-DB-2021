@@ -15,7 +15,7 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 
 public class FamilyTree {
-    private final ArrayList<FamilyTreeNode> RootList;
+    private final ArrayList<FamilyTreeNode[]> RootList;
     private final RestClient client;
     private final ObjectMapper mapper;
     private FamilyTreeNode[] root;
@@ -38,13 +38,13 @@ public class FamilyTree {
     {
         this.client = new RestClient("http://localhost:8080");
         this.mapper = new ObjectMapper();
-        this.RootList = new ArrayList<FamilyTreeNode>();
+        this.RootList = new ArrayList<FamilyTreeNode[]>();
         this.root = new FamilyTreeNode[1];
     }
 /*
     Return the generated monkey list to the user
 */
-    public ArrayList<FamilyTreeNode> getMonkeyList() {
+    public ArrayList<FamilyTreeNode[]> getMonkeyList() {
         return this.RootList;
     }
 
@@ -68,8 +68,18 @@ public class FamilyTree {
         //ArrayList<FamilyTreeNode> roots = new ArrayList<FamilyTreeNode>();
         for(Founder f: founders)
         {
-            RootList.add(new FamilyTreeNode(founderToMonkey(f)));
+            //root[0] = new FamilyTreeNode(founderToMonkey(f));
+            RootList.add(new FamilyTreeNode[]{new FamilyTreeNode(founderToMonkey(f))});
+            //for(FamilyTreeNode[] n: RootList)
+            //    System.out.println(n[0].monkey);
         }
+
+        /*
+        for(FamilyTreeNode ftn : RootList)
+        {
+            System.out.println(ftn.monkey);
+        }
+        */
 
         ExecutorService executor = Executors.newFixedThreadPool(founders.size());
         Collection<Runnable> runnables = new ArrayList<Runnable>();
@@ -77,8 +87,7 @@ public class FamilyTree {
             int x = i;
             runnables.add(() -> {
                 try {
-                    root[0] = RootList.get(x);
-                    addChain(root);
+                    addChain(RootList.get(x));
                     System.out.println("DONE WITH THIS ROOT");
                 } catch (JsonProcessingException e) {
                     e.printStackTrace();
@@ -169,7 +178,10 @@ public class FamilyTree {
     }
 
     public void printTree() {
-        printTree(root);
+        for(FamilyTreeNode[] rt: RootList) {
+            printTree(rt);
+            //System.out.println(rt[0].monkey);
+        }
     }
     private void printTree(FamilyTreeNode[] root) {
         System.out.println(root[0].monkey);

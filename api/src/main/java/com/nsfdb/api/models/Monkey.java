@@ -190,6 +190,6 @@ public class Monkey {
     }
 
     public String toString() {
-        return "sequence_id: " + sequence_id + " | behavior_mom: " + behavior_mom;
+        return "sequence_id: " + sequence_id + " | animal_id: " + animal_id +" | behavior_mom: " + behavior_mom;
     }
 }

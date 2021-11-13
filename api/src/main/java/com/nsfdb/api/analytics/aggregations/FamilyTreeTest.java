@@ -18,8 +18,10 @@ public class FamilyTreeTest {
         FamilyTree myTree = new FamilyTree();
         myTree.create();
         //Thread.sleep(60000);
+        //System.out.println("DONE BUILDING TREE???");
         //System.out.println("myTree.size(): " + myTree.counter);
-        //myTree.printTree();
-//        ArrayList<Monkey> monkeys = myTree.getMonkeyList();
+
+        myTree.printTree();
+        return;
     }
 }
