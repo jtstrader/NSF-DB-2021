@@ -9,7 +9,7 @@ import java.awt.event.KeyEvent;
 
 public class DBMainWindow extends JFrame {
     public DBMainWindow() {
-        JMenuBar menuBar;
+        /*JMenuBar menuBar;
         JMenu menu;
         JMenuItem menuItem;
 
@@ -45,7 +45,7 @@ public class DBMainWindow extends JFrame {
         menu.add(menuItem);
         menuBar.add(menu);
 
-        this.setJMenuBar(menuBar);
+        this.setJMenuBar(menuBar);*/
     }
     public static void main(String[] args) {
         JFrame window = new DBMainWindow();
