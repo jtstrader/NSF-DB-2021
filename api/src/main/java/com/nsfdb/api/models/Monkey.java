@@ -19,7 +19,6 @@ public class Monkey {
     Integer birth_season;
     Character sex;
     String birth_group;
-    String behavior_mom;
     String current_group;
     String status;
     Date date_of_death;
@@ -32,7 +31,7 @@ public class Monkey {
     String sire_genetic;
     Integer pedigree;
     Integer sibling_no;
-    String matriarch;
+    String behavior_mom;
 
     public Monkey() {
 
@@ -84,14 +83,6 @@ public class Monkey {
 
     public void setBirth_group(String birth_group) {
         this.birth_group = birth_group;
-    }
-
-    public String getBehavior_mom() {
-        return behavior_mom;
-    }
-
-    public void setBehavior_mom(String behavior_mom) {
-        this.behavior_mom = behavior_mom;
     }
 
     public String getCurrent_group() {
@@ -190,11 +181,15 @@ public class Monkey {
         this.sibling_no = sibling_no;
     }
 
-    public String getMatriarch() {
-        return matriarch;
+    public String getBehavior_mom() {
+        return behavior_mom;
     }
 
-    public void setMatriarch(String matriarch) {
-        this.matriarch = matriarch;
+    public void setBehavior_mom(String behavior_mom) {
+        this.behavior_mom = behavior_mom;
+    }
+
+    public String toString() {
+        return "sequence_id: " + sequence_id + " | animal_id: " + animal_id +" | behavior_mom: " + behavior_mom;
     }
 }
