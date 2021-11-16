@@ -20,7 +20,7 @@ public class FamilyTreePanel extends JPanel {
 
     public FamilyTreePanel() throws JsonProcessingException, ExecutionException, InterruptedException, TimeoutException {
         super(new GridLayout(1,0));
-        Dimension windowSize = new Dimension(500, 400);
+        Dimension windowSize = new Dimension(600, 400);
         this.setPreferredSize(windowSize);
         this.setMaximumSize(windowSize);
         this.setMinimumSize(windowSize);

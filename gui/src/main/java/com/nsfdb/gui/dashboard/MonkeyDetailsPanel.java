@@ -46,7 +46,7 @@ public class MonkeyDetailsPanel extends JPanel {
     }
 
     public MonkeyDetailsPanel() {
-        Dimension windowSize = new Dimension(275, 400);
+        Dimension windowSize = new Dimension(250, 400);
         this.setPreferredSize(windowSize);
         this.setMaximumSize(windowSize);
         this.setMinimumSize(windowSize);
