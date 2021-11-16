@@ -57,8 +57,8 @@ public class DBMainWindow extends JFrame {
         FamilyTreePanel treePanel = new FamilyTreePanel();
         window.add(treePanel, BorderLayout.CENTER);
 
-        MonkeyDetailsPanel detailsPanel = new MonkeyDetailsPanel();
-        window.add(detailsPanel, BorderLayout.EAST);
+        //MonkeyDetailsPanel detailsPanel = new MonkeyDetailsPanel();
+        //window.add(detailsPanel, BorderLayout.EAST);
 
         window.pack();
         window.setVisible(true);

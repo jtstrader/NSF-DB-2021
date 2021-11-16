@@ -6,20 +6,26 @@ import com.nsfdb.api.analytics.aggregations.FamilyTreeNode;
 import com.nsfdb.api.models.Monkey;
 
 import javax.swing.*;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeSelectionModel;
 import java.awt.*;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
 public class FamilyTreePanel extends JPanel {
     private JTree tree;
+    MonkeyDetailsPanel detailsPanel;
 
     public FamilyTreePanel() throws JsonProcessingException, ExecutionException, InterruptedException, TimeoutException {
         super(new GridLayout(1,0));
-        Dimension windowSize = new Dimension(300, 400);
+        Dimension windowSize = new Dimension(500, 400);
         this.setPreferredSize(windowSize);
         this.setMaximumSize(windowSize);
         this.setMinimumSize(windowSize);
+
+        detailsPanel = new MonkeyDetailsPanel();
 
         //DefaultMutableTreeNode top = new DefaultMutableTreeNode("Monkeys");
         //FamilyTreeNode top = new FamilyTreeNode(new Monkey());
@@ -54,8 +60,23 @@ public class FamilyTreePanel extends JPanel {
             tree.expandRow(i);
         }
 
+        tree.getSelectionModel().setSelectionMode
+                (TreeSelectionModel.SINGLE_TREE_SELECTION);
+
+        tree.addTreeSelectionListener(new TreeSelectionListener() {
+            public void valueChanged(TreeSelectionEvent e) {
+                FamilyTreeNode node = (FamilyTreeNode)
+                        tree.getLastSelectedPathComponent();
+
+                if (node == null) return;
+                detailsPanel.setMonkey(node.getMonkey());
+
+            }
+        });
+
         JScrollPane treeView = new JScrollPane(tree);
-        this.add(treeView);
+        this.add(treeView, BorderLayout.WEST);
+        this.add(detailsPanel, BorderLayout.EAST);
     }
 
     private void fillTree(FamilyTreeNode root) {
