@@ -201,4 +201,33 @@ public class FamilyTree {
             printTree(root[0].sibling);
         return;
     }
+
+    public FamilyTreeNode treeify() {
+        Monkey fakeMonkey = new Monkey();
+        fakeMonkey.setAnimal_id("Monkeys");
+        FamilyTreeNode top = new FamilyTreeNode(fakeMonkey);
+
+        for(int i = 0; i < RootList.size(); i++) {
+            FamilyTreeNode root = RootList.get(i)[0];
+            jTreeifyNodes(root);
+            top.add(root);
+        }
+        return top;
+    }
+
+    private void jTreeifyNodes(FamilyTreeNode root) {
+        if(root.getChild()[0] != null) {
+            root.add(root.getChild()[0]);
+            jTreeifySiblings(root.getChild()[0], root);
+            jTreeifyNodes(root.getChild()[0]);
+        }
+    }
+
+    private void jTreeifySiblings(FamilyTreeNode root, FamilyTreeNode parent) {
+        if(root.getSibling()[0] != null) {
+            parent.add(root.getSibling()[0]);
+            jTreeifyNodes(root.getSibling()[0]);
+            jTreeifySiblings(root.getSibling()[0], parent);
+        }
+    }
 }

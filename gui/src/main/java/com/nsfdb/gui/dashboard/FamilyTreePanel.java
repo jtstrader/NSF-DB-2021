@@ -24,6 +24,7 @@ public class FamilyTreePanel extends JPanel {
         //DefaultMutableTreeNode top = new DefaultMutableTreeNode("Monkeys");
         //FamilyTreeNode top = new FamilyTreeNode(new Monkey());
         Monkey fakeMonkey = new Monkey();
+        fakeMonkey.setAnimal_id("Monkeys");
         FamilyTreeNode top = new FamilyTreeNode(fakeMonkey);
 
         //viewTest(top); // Tests the tree and the scroll feature
@@ -31,11 +32,11 @@ public class FamilyTreePanel extends JPanel {
         FamilyTree myTree = new FamilyTree();
         myTree.create();
 
-        for(int i = 0; i <myTree.getMonkeyList().size(); i++) {
+        /*for(int i = 0; i <myTree.getMonkeyList().size(); i++) {
             FamilyTreeNode root = myTree.getMonkeyList().get(i)[0];
             fillTree(root);
             top.add(root);
-        }
+        }*/
        /* for(int i = 0; i < myTree.getMonkeyList().size(); i++)
         {
             root = new FamilyTreeNode(myTree.getMonkeyList().get(0)[0].getMonkey());
@@ -45,7 +46,8 @@ public class FamilyTreePanel extends JPanel {
 
         myTree.printTree();
 
-        tree = new JTree(top);
+        //tree = new JTree(top);
+        tree = new JTree(myTree.treeify());
 
         // Expands the tree to show all nodes
         for(int i = 0; i < tree.getRowCount(); i++) {
