@@ -1,11 +1,14 @@
 package com.nsfdb.gui.main;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.nsfdb.gui.dashboard.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
 
 public class DBMainWindow extends JFrame {
     public DBMainWindow() {
@@ -47,7 +50,7 @@ public class DBMainWindow extends JFrame {
 
         this.setJMenuBar(menuBar);*/
     }
-    public static void main(String[] args) {
+    public static void main(String[] args) throws JsonProcessingException, ExecutionException, InterruptedException, TimeoutException {
         JFrame window = new DBMainWindow();
         window.setTitle("Monkey DB");
 

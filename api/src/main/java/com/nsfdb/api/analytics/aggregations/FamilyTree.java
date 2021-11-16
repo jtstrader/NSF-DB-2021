@@ -14,6 +14,8 @@ import org.apache.tomcat.jni.Time;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.scheduling.annotation.AsyncResult;
 
+import javax.swing.tree.DefaultMutableTreeNode;
+
 public class FamilyTree {
     private final ArrayList<FamilyTreeNode[]> RootList;
     private final RestClient client;
@@ -22,7 +24,7 @@ public class FamilyTree {
     public int counter = 0;
 
     // n-tree
-    class FamilyTreeNode {
+    /*public class FamilyTreeNode extends DefaultMutableTreeNode {
         Monkey monkey;
         FamilyTreeNode[] sibling;
         FamilyTreeNode[] child;
@@ -32,7 +34,13 @@ public class FamilyTree {
             sibling = new FamilyTreeNode[1];
             child = new FamilyTreeNode[1];
         }
-    }
+
+        public Monkey getMonkey() { return monkey; }
+
+        public FamilyTreeNode[] getSibling() { return sibling; }
+
+        public FamilyTreeNode[] getChild() { return child; }
+    }*/
 
     public FamilyTree()
     {
@@ -41,6 +49,7 @@ public class FamilyTree {
         this.RootList = new ArrayList<FamilyTreeNode[]>();
         this.root = new FamilyTreeNode[1];
     }
+
 /*
     Return the generated monkey list to the user
 */
