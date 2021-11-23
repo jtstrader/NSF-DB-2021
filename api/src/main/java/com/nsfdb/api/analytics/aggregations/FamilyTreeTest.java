@@ -15,13 +15,15 @@ public class FamilyTreeTest {
         Scanner in = new Scanner(System.in);
         System.out.println("Press Enter to start...");
         in.nextLine();
-        FamilyTree myTree = new FamilyTree();
-        myTree.create();
+        //FamilyTree myTree = new FamilyTree();
+        LifeTable myTable = new LifeTable();
+        //myTree.create();
         //Thread.sleep(60000);
         //System.out.println("DONE BUILDING TREE???");
         //System.out.println("myTree.size(): " + myTree.counter);
 
-        myTree.printTree();
+        //myTree.printTree();
+        myTable.printLifeTable(myTable.getLifeTableData());
         return;
     }
 }

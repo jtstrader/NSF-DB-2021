@@ -32,6 +32,10 @@ public class MonkeyController {
     @RequestMapping("mom/{behavior_mom}")
     public List<Monkey> getChildren(@PathVariable String behavior_mom) { return monkeyRepository.getChildren(behavior_mom); }
 
+    @GetMapping
+    @RequestMapping("deathAges")
+    public List<List<Double>> getAges() { return monkeyRepository.getAges(); }
+
     @PostMapping
     public Monkey create(@RequestBody final Monkey monkey) {
         return monkeyRepository.saveAndFlush(monkey);
