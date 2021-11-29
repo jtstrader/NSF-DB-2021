@@ -8,7 +8,7 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface MonkeyRepository extends JpaRepository<Monkey, Integer> {
-
+    
     //Query to retreive all children of a monkey
     @Query("SELECT m FROM CSSubject m WHERE m.behavior_mom = :mom_id")
     public List<Monkey> getChildren(@Param("mom_id") String mom_id);

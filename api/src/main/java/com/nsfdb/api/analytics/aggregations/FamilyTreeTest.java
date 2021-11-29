@@ -22,6 +22,7 @@ public class FamilyTreeTest {
         //System.out.println("DONE BUILDING TREE???");
         //System.out.println("myTree.size(): " + myTree.counter);
 
+
         //myTree.printTree();
         myTable.printLifeTable(myTable.getLifeTableData());
         return;

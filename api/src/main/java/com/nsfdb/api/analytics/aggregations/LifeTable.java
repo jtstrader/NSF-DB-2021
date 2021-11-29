@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nsfdb.api.analytics.RestClient;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.lang.Math;
 import java.util.List;
@@ -53,31 +54,28 @@ public class LifeTable {
 // Gets all the monkeys that died at that age
         int tempPos = -1;
         double totalMonkeys = 0;
+        lifeTable[0][1] = 0;
         for(int i = 0; i < monkeyAges.size(); i++){
-            // this is so the age is a whole number, based on the year. This is so we can get the total that died a spefic age based on years only
+            // this is so the age is a whole number, based on the year. This is so we can get the total that died a specific age based on years only
             tempPos = (int)Math.floor(monkeyAges.get(i).get(0));
-            lifeTable[tempPos][1] += monkeyAges.get(i).get(1);
+            lifeTable[tempPos+1][1] += monkeyAges.get(i).get(1); //adds to number of monkeys that will die by age tempPos + 1. THIS IS DX
             totalMonkeys += monkeyAges.get(i).get(1); // The total number monkeys at that died
         }
-
-
 
             /*
             LifeTable Columns
             Age = 0
-            Total = 1
-            Deaths = 2
-            Nx = 3
-            mx = 4
-            qx = 5
-            px = 6
-            Ix = 7
-            dx = 8
-            Lx = 9
-            Tx = 10
-            Ex = 11
+            DX = 1
+            NX = 2
+            IX = 3
+            QX = 4
+            PX = 5
+            LX = 6
+            TX = 7
+            EX = 8
             */
 
+        System.out.println("Calculating NX");
         //getting NX is getting the all of the subjects who lived through that age
         double NX = totalMonkeys;
         for (int i = 0; i < lifeTable.length; i++) {
@@ -85,77 +83,63 @@ public class LifeTable {
             lifeTable[i][2] = NX;
         }
 
-        //mx = Death/NX
-            double mx;
-            double nx;
-            double d; // total number of monkeys that dead at a specific age
-            for (int i = 0; i < lifeTable.length; i++) {
-                nx = lifeTable[i][2];
-                d = lifeTable[i][1];
-                mx = d / nx;
-                //Set the average to the last value in case of divide by zero
-                if(mx == 0.0 || nx == 0.0)
-                    mx = lifeTable[i-1][3];
-                lifeTable[i][3] = mx; // puts values into table
+        //calc ix aka proportion surviving
+        //ix = nx / total monkeys
+        for(int i = 0; i < lifeTable.length; i++) {
+            lifeTable[i][3] = lifeTable[i][2] / lifeTable[0][2];
+        }
+
+        //calc qx aka mortality rate
+        //qx = dx/nx
+        //dx is stored at index 1
+        for(int i = 0; i < lifeTable.length; i++) {
+            if(i < lifeTable.length-1)
+                lifeTable[i][4] = lifeTable[i+1][1]/lifeTable[i][2]; // puts values into table
+            else
+                lifeTable[i][4] = 1; // puts values into table, default is 1 because all of the last monkeys have died
+        }
+
+        //calc px aka survivability rate
+        //px = 1 - qx, inverse of mortality rate
+        for(int i = 0; i < lifeTable.length; i++) {
+            lifeTable[i][5] = 1 - lifeTable[i][4]; // puts values into table
+        }
+
+        //calc lx aka average number alive in class
+        //lx = (lx + lx-1) / 2
+        for(int i = 0; i < lifeTable.length; i++) {
+            if(i < 35)
+                lifeTable[i][6] = (lifeTable[i][2] + lifeTable[i+1][2])/2.0; // puts values into table
+            else
+                lifeTable[i][6] = lifeTable[i][2]/2.0; // puts values into table
+        }
+
+        //calc tx aka sum of prev lx's
+        //gets sum of all items in column(index) 6 from i to lifetable.length
+        double tx;
+        for(int i = 0; i < lifeTable.length; i++) {
+            tx = 0;
+            for(int j = i; j < lifeTable.length; j++) {
+                tx += lifeTable[j][6];
             }
 
-        //qx = 1 - exp(-mx)
-        double qx;
-        for (int i = 0; i < lifeTable.length; i++) {
-            qx = 1 - exp(-lifeTable[i][3]);
-            lifeTable[i][4] = qx; // puts values into table
+            lifeTable[i][7] = tx; // puts values into table
         }
 
-        //px = 1 - qx
-        double px;
-        for (int i = 0; i < lifeTable.length; i++) {
-            px = 1 - lifeTable[i][4];
-            lifeTable[i][5] = px; // puts values into table
-        }
-
-        //Proportion Surviving Nx/ Total
-        double Ix = 1;
-        for (int i = 0; i < lifeTable.length; i++) {
-            if (i == 0)
-                Ix = 1;
+        //calc ex aka life expectancy
+        //ex = tx/nx
+        for(int i = 0; i < lifeTable.length; i++) {
+            if(lifeTable[i][2] != 0) //handling divide by zero
+                lifeTable[i][8] = lifeTable[i][7] / lifeTable[i][2]; // puts values into table
             else
-                Ix = lifeTable[i - 1][2] / totalMonkeys;
-            lifeTable[i][6] = Ix; // puts values into table
+                lifeTable[i][8] = 0; //default is zero years
         }
-
-            //Lx
-            for (int i = 0; i < lifeTable.length - 1; i++) {
-                lifeTable[i][7] = (lifeTable[i][2] + lifeTable[i+1][2])/2;
-            }
-            lifeTable[35][7] = lifeTable[35][2]/2;
-
-
-        //getting Tx is getting the sum of the previous column starting from that row
-        double Tx;
-        for (int i = 0; i < lifeTable.length; i++) {
-            Tx = 0;
-
-            for (int x = i; x < lifeTable.length; x++)
-                Tx += lifeTable[x][7];
-
-            lifeTable[i][8] = Tx; // puts values into table
-        }
-
-        //Ex = Tx / Ix
-        double Ex;
-        for (int i = 0; i < lifeTable.length; i++) {
-            if(lifeTable[i][2] != 0)
-                Ex = lifeTable[i][8]/lifeTable[i][2];
-            else
-                Ex = 0;
-            lifeTable[i][9] = Ex; // puts values into table
-        }
-
         return lifeTable;
     }
 //Prints the table for testing, and check the values.
     public void printLifeTable(double[][] lifeTable)
     {
+        /*
         String columns [] = {"Age","Dead", "NX", "mx", "qx", "px", "Ix", "Lx", "Tx", "Ex"};
         for(int i = 0; i < columns.length; i++)
             System.out.print(columns[i] + "\t\t\t\t");
@@ -164,7 +148,21 @@ public class LifeTable {
 
         for(int i = 0; i < lifeTable.length; i++) {
             for (int x = 0; x < 9; x++) {
-                System.out.print(lifeTable[i][x] + "\t\t\t");
+                System.out.print(lifeTable[i][x] + "\t\t\t\t");
+            }
+            System.out.println("");
+        }
+        */
+        DecimalFormat df = new DecimalFormat("###.###");
+        System.out.println("Age Class \t\t dx \t\t\t\t NX \t\t\t ix \t\t\t\t qx \t\t\t\t  px \t\t\t\t lx \t\t\t\t tx \t\t\t\t ex");
+        for(int i = 0; i < lifeTable.length; i++) {
+            if(lifeTable[i][2] == 0)
+                break;
+            for (int x = 0; x < 9; x++) {
+                if(x != 1)
+                    System.out.print(df.format(lifeTable[i][x]) + "\t\t\t\t");
+                else
+                    System.out.print(df.format(lifeTable[i+1][x]) + "\t\t\t\t");
             }
             System.out.println("");
         }
