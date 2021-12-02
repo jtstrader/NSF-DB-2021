@@ -17,7 +17,7 @@ public class Monkey {
     String animal_id;
     Date date_of_birth;
     Integer birth_season;
-    Character sex;
+    String sex;
     String birth_group;
     String current_group;
     String status;
@@ -69,11 +69,11 @@ public class Monkey {
         this.birth_season = birth_season;
     }
 
-    public Character getSex() {
+    public String getSex() {
         return sex;
     }
 
-    public void setSex(Character sex) {
+    public void setSex(String sex) {
         this.sex = sex;
     }
 
