@@ -11,20 +11,18 @@ import java.util.concurrent.TimeoutException;
 
 public class FamilyTreeTest {
 
-    public static void main(String[] args) throws JsonProcessingException, ExecutionException, InterruptedException, TimeoutException {
+    public static void main(String[] args) throws JsonProcessingException, InterruptedException {
         Scanner in = new Scanner(System.in);
         System.out.println("Press Enter to start...");
         in.nextLine();
-        //FamilyTree myTree = new FamilyTree();
-        LifeTable myTable = new LifeTable();
-        //myTree.create();
-        //Thread.sleep(60000);
-        //System.out.println("DONE BUILDING TREE???");
-        //System.out.println("myTree.size(): " + myTree.counter);
 
+        // family tree testing
+        FamilyTree myTree = new FamilyTree();
+        myTree.create();
+        myTree.printTree();
 
-        //myTree.printTree();
-        myTable.printLifeTable(myTable.getLifeTableData());
-        return;
+        // life table testing
+//        LifeTable myTable = new LifeTable();
+//        myTable.printLifeTable(myTable.getLifeTableData());
     }
 }
