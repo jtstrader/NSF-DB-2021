@@ -7,55 +7,39 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
 public class DBMainWindow extends JFrame {
-    public DBMainWindow() {
-        /*JMenuBar menuBar;
-        JMenu menu;
-        JMenuItem menuItem;
+    public DBMainWindow() throws ExecutionException, JsonProcessingException, InterruptedException, TimeoutException {
+        FamilyTreePanel treePanel = new FamilyTreePanel();
+        this.add(treePanel, BorderLayout.CENTER);
 
-        menuBar = new JMenuBar();
+        ArrayList<JPanel> panels = new ArrayList<>();
+        panels.add(treePanel);
 
-        // Build the file menu
-        menu = new JMenu("File");
-        menu.setMnemonic(KeyEvent.VK_1);
-        menuItem = new JMenuItem("Logout");
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(
-                KeyEvent.VK_L, ActionEvent.ALT_MASK
-        ));
-        menu.add(menuItem);
-        menuBar.add(menu);
+        NavigationPanel nav = new NavigationPanel(panels);
+        this.add(nav, BorderLayout.WEST);
 
-        // Build the edit menu
-        menu = new JMenu("Edit");
-        menu.setMnemonic(KeyEvent.VK_2);
-        menuItem = new JMenuItem("Temp");
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(
-                KeyEvent.VK_A, ActionEvent.ALT_MASK
-        ));
-        menu.add(menuItem);
-        menuBar.add(menu);
-
-        // Build the view menu
-        menu = new JMenu("View");
-        menu.setMnemonic(KeyEvent.VK_3);
-        menuItem = new JMenuItem("Temp");
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(
-                KeyEvent.VK_B, ActionEvent.ALT_MASK
-        ));
-        menu.add(menuItem);
-        menuBar.add(menu);
-
-        this.setJMenuBar(menuBar);*/
+        nav.addPanel(treePanel);
     }
-    public static void main(String[] args) throws JsonProcessingException, ExecutionException, InterruptedException, TimeoutException {
+
+    public static void main(String[] args) throws ExecutionException, JsonProcessingException, InterruptedException, TimeoutException {
+        try {
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (UnsupportedLookAndFeelException e) {
+            e.printStackTrace();
+        }
+
         JFrame window = new DBMainWindow();
         window.setTitle("Monkey DB");
-
-        FamilyTreePanel treePanel = new FamilyTreePanel();
-        window.add(treePanel, BorderLayout.CENTER);
 
         //MonkeyDetailsPanel detailsPanel = new MonkeyDetailsPanel();
         //window.add(detailsPanel, BorderLayout.EAST);

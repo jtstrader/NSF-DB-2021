@@ -75,6 +75,9 @@ public class FamilyTreePanel extends JPanel {
         });
 
         JScrollPane treeView = new JScrollPane(tree);
+        JPanel treePanel = new JPanel();
+        treePanel.add(treeView);
+
         this.add(treeView, BorderLayout.WEST);
         this.add(detailsPanel, BorderLayout.EAST);
     }
