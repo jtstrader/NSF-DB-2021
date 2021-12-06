@@ -21,6 +21,7 @@ public class FamilyTree {
     private final RestClient client;
     private final ObjectMapper mapper;
     private FamilyTreeNode[] root;
+    private ArrayList<Monkey> monkeyList;
     public int counter = 0;
 
     // n-tree
@@ -42,12 +43,12 @@ public class FamilyTree {
         public FamilyTreeNode[] getChild() { return child; }
     }*/
 
-    public FamilyTree()
-    {
+    public FamilyTree() throws JsonProcessingException {
         this.client = new RestClient("http://localhost:8080");
         this.mapper = new ObjectMapper();
         this.RootList = new ArrayList<>();
         this.root = new FamilyTreeNode[1];
+        this.monkeyList = mapper.readValue(client.get("/api/monkey"),new TypeReference<>() {});
     }
 
 /*
@@ -109,7 +110,15 @@ public class FamilyTree {
     void addChain(FamilyTreeNode[] ftn) throws JsonProcessingException, ExecutionException, InterruptedException, TimeoutException {
         counter++;
 
-        ArrayList<Monkey> children = mapper.readValue(client.get("/api/monkey/mom/" + ftn[0].monkey.getAnimal_id()), new TypeReference<>() {});
+        //ArrayList<Monkey> children = mapper.readValue(client.get("/api/monkey/mom/" + ftn[0].monkey.getAnimal_id()), new TypeReference<>() {});
+        ArrayList<Monkey> children = new ArrayList<>();
+        for(Monkey m: monkeyList) {
+            String key = ftn[0].monkey.getAnimal_id();
+            key = key.replace("#","");
+            if(m.getBehavior_mom().equalsIgnoreCase(key)) {
+                children.add(m);
+            }
+        }
         if (children.size() == 0)
             return;
 
