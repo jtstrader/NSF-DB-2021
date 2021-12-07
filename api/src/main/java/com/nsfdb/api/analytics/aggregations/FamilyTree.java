@@ -110,12 +110,12 @@ public class FamilyTree {
     void addChain(FamilyTreeNode[] ftn) throws JsonProcessingException, ExecutionException, InterruptedException, TimeoutException {
         counter++;
 
-        //ArrayList<Monkey> children = mapper.readValue(client.get("/api/monkey/mom/" + ftn[0].monkey.getAnimal_id()), new TypeReference<>() {});
+        //linear search to find all chidren of current monkey (kind of slow but faster than API calls)
         ArrayList<Monkey> children = new ArrayList<>();
         for(Monkey m: monkeyList) {
-            String key = ftn[0].monkey.getAnimal_id();
-            key = key.replace("#","");
-            if(m.getBehavior_mom().equalsIgnoreCase(key)) {
+            String key = ftn[0].monkey.getAnimal_id(); //set the key that we are looking for to the animalId of the parent monkey
+            key = key.replace("#","");  //remove #'s that are randomly at the end of animalId's but not on behavior mom's
+            if(m.getBehavior_mom().equalsIgnoreCase(key)) { //add children to children list
                 children.add(m);
             }
         }
