@@ -26,27 +26,43 @@ public class DBMainWindow extends JFrame {
     }
 
     public static void main(String[] args) throws ExecutionException, JsonProcessingException, InterruptedException, TimeoutException {
-        try {
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
-            e.printStackTrace();
-        } catch (UnsupportedLookAndFeelException e) {
-            e.printStackTrace();
-        }
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                try {
+                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                } catch (ClassNotFoundException e) {
+                    e.printStackTrace();
+                } catch (InstantiationException e) {
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                } catch (UnsupportedLookAndFeelException e) {
+                    e.printStackTrace();
+                }
 
-        JFrame window = new DBMainWindow();
-        window.setTitle("Monkey DB");
+                JFrame window = null;
+                try {
+                    window = new DBMainWindow();
 
-        //MonkeyDetailsPanel detailsPanel = new MonkeyDetailsPanel();
-        //window.add(detailsPanel, BorderLayout.EAST);
+                    window.setTitle("Monkey DB");
 
-        window.pack();
-        window.setVisible(true);
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    //MonkeyDetailsPanel detailsPanel = new MonkeyDetailsPanel();
+                    //window.add(detailsPanel, BorderLayout.EAST);
 
+                    window.pack();
+                    window.setVisible(true);
+                    window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                } catch (ExecutionException e) {
+                    e.printStackTrace();
+                } catch (JsonProcessingException e) {
+                    e.printStackTrace();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                } catch (TimeoutException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }
