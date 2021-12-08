@@ -23,7 +23,7 @@ public class DBMainWindow extends JFrame {
         NavigationPanel nav = new NavigationPanel(panels);
         this.add(nav, BorderLayout.WEST);
 
-        nav.addPanel(treePanel);
+        //nav.addPanel(treePanel);
     }
 
     public static void main(String[] args) throws ExecutionException, IOException, InterruptedException, TimeoutException {
