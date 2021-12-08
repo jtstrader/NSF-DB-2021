@@ -7,12 +7,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
 public class DBMainWindow extends JFrame {
-    public DBMainWindow() throws ExecutionException, JsonProcessingException, InterruptedException, TimeoutException {
+    public DBMainWindow() throws ExecutionException, IOException, InterruptedException, TimeoutException {
         FamilyTreePanel treePanel = new FamilyTreePanel();
         this.add(treePanel, BorderLayout.CENTER);
 
@@ -25,7 +26,7 @@ public class DBMainWindow extends JFrame {
         nav.addPanel(treePanel);
     }
 
-    public static void main(String[] args) throws ExecutionException, JsonProcessingException, InterruptedException, TimeoutException {
+    public static void main(String[] args) throws ExecutionException, IOException, InterruptedException, TimeoutException {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
@@ -60,6 +61,8 @@ public class DBMainWindow extends JFrame {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 } catch (TimeoutException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
