@@ -25,7 +25,7 @@ public class MonkeyDetailsPanel extends JPanel {
         String birth = "Date of Birth: " + monkey.getDate_of_birth();
         birthLabel.setText(birth);
 
-        System.out.println(monkey.getDate_of_death());
+        //System.out.println(monkey.getDate_of_death());
         if(monkey.getDate_of_death() == null) {
             deathLabel.setVisible(false);
             this.repaint();

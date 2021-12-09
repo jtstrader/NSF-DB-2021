@@ -65,7 +65,8 @@ public class NavigationPanel extends JPanel {
             public void stateChanged(ChangeEvent e) {
                 ButtonModel model = (ButtonModel) treeBut.getModel();
                 if(model.isPressed()) {
-                    panelList.get(0).setVisible(true);
+                    //panelList.get(0).setVisible(true);
+                    setVisiblePanel(panelList.get(0));
                 }
                 else if(model.isRollover()) {
                     treeBut.setBackground(new Color(253,238,229));
@@ -121,7 +122,7 @@ public class NavigationPanel extends JPanel {
             public void stateChanged(ChangeEvent e) {
                 ButtonModel model = (ButtonModel) searchBut.getModel();
                 if(model.isPressed()) {
-                    panelList.get(0).setVisible(false);
+                    setVisiblePanel(null);
                 }
                 else if(model.isRollover()) {
                     searchBut.setBackground(new Color(253,238,229));
@@ -166,7 +167,7 @@ public class NavigationPanel extends JPanel {
             public void stateChanged(ChangeEvent e) {
                 ButtonModel model = (ButtonModel) lifeTableBut.getModel();
                 if(model.isPressed()) {
-                    panelList.get(0).setVisible(false);
+                    setVisiblePanel(panelList.get(1));
 
                     mainNav.setVisible(true);
                     mainNav.setEnabled(true);
@@ -199,7 +200,7 @@ public class NavigationPanel extends JPanel {
             public void stateChanged(ChangeEvent e) {
                 ButtonModel model = (ButtonModel) suturesGraph.getModel();
                 if(model.isPressed()) {
-                    panelList.get(0).setVisible(false);
+                    setVisiblePanel(null);
 
                     mainNav.setVisible(true);
                     mainNav.setEnabled(true);
@@ -232,7 +233,7 @@ public class NavigationPanel extends JPanel {
             public void stateChanged(ChangeEvent e) {
                 ButtonModel model = (ButtonModel) healingBut.getModel();
                 if(model.isPressed()) {
-                    panelList.get(0).setVisible(false);
+                    setVisiblePanel(null);
 
                     mainNav.setVisible(true);
                     mainNav.setEnabled(true);
@@ -286,6 +287,18 @@ public class NavigationPanel extends JPanel {
         popupNav.add(backBut);
 
         return popupNav;
+    }
+
+    void setVisiblePanel(JPanel visiblePanel) {
+        for(JPanel pan:panelList) {
+            pan.setVisible(false);
+            pan.setEnabled(false);
+        }
+
+        if(visiblePanel != null) {
+            visiblePanel.setVisible(true);
+            visiblePanel.setEnabled(true);
+        }
     }
 
     @Override

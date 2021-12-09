@@ -15,10 +15,22 @@ import java.util.concurrent.TimeoutException;
 public class DBMainWindow extends JFrame {
     public DBMainWindow() throws ExecutionException, IOException, InterruptedException, TimeoutException {
         FamilyTreePanel treePanel = new FamilyTreePanel();
-        this.add(treePanel, BorderLayout.CENTER);
+        treePanel.setVisible(true);
+        treePanel.setEnabled(true);
+        //this.add(treePanel, BorderLayout.CENTER);
+
+        LifeTablePanel lifePanel = new LifeTablePanel();
+        lifePanel.setVisible(false);
+        lifePanel.setEnabled(false);
+
+        JPanel display = new DisplayPanel();
+        display.add(treePanel);
+        display.add(lifePanel);
+        this.add(display, BorderLayout.CENTER);
 
         ArrayList<JPanel> panels = new ArrayList<>();
         panels.add(treePanel);
+        panels.add(lifePanel);
 
         NavigationPanel nav = new NavigationPanel(panels);
         this.add(nav, BorderLayout.WEST);
