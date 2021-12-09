@@ -25,7 +25,7 @@ public class LifeTable {
         this.client = new RestClient("http://localhost:8080");
         this.mapper = new ObjectMapper();
 
-        columns = new String[]{ "Age", "Died", "Nx", "Mx", "Qx", "Px", "Ix", "Lx", "Tx", "Ex"};
+        columns = new String[]{ "Age", "Dx", "Nx", "Ix", "Qx", "Px", "Lx", "Tx", "Ex"};
 
         lifeTable = createLifeTable("/api/monkey/deathAges");
     }
