@@ -23,14 +23,26 @@ public class DBMainWindow extends JFrame {
         lifePanel.setVisible(false);
         lifePanel.setEnabled(false);
 
+        ClosurePanel closurePanel = new ClosurePanel();
+        closurePanel.setVisible(false);
+        closurePanel.setEnabled(false);
+
+        HealingPanel healingPanel = new HealingPanel();
+        healingPanel.setVisible(false);
+        healingPanel.setEnabled(false);
+
         JPanel display = new DisplayPanel();
         display.add(treePanel);
         display.add(lifePanel);
+        display.add(closurePanel);
+        display.add(healingPanel);
         this.add(display, BorderLayout.CENTER);
 
         ArrayList<JPanel> panels = new ArrayList<>();
         panels.add(treePanel);
         panels.add(lifePanel);
+        panels.add(closurePanel);
+        panels.add(healingPanel);
 
         NavigationPanel nav = new NavigationPanel(panels);
         this.add(nav, BorderLayout.WEST);

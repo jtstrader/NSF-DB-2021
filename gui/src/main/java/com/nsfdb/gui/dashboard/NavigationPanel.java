@@ -200,7 +200,7 @@ public class NavigationPanel extends JPanel {
             public void stateChanged(ChangeEvent e) {
                 ButtonModel model = (ButtonModel) suturesGraph.getModel();
                 if(model.isPressed()) {
-                    setVisiblePanel(null);
+                    setVisiblePanel(panelList.get(2));
 
                     mainNav.setVisible(true);
                     mainNav.setEnabled(true);
@@ -233,7 +233,7 @@ public class NavigationPanel extends JPanel {
             public void stateChanged(ChangeEvent e) {
                 ButtonModel model = (ButtonModel) healingBut.getModel();
                 if(model.isPressed()) {
-                    setVisiblePanel(null);
+                    setVisiblePanel(panelList.get(3));
 
                     mainNav.setVisible(true);
                     mainNav.setEnabled(true);
