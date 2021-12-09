@@ -14,23 +14,29 @@ import java.util.concurrent.TimeoutException;
 
 public class DBMainWindow extends JFrame {
     public DBMainWindow() throws ExecutionException, IOException, InterruptedException, TimeoutException {
+
+        // Build the Family Tree Panel
         FamilyTreePanel treePanel = new FamilyTreePanel();
         treePanel.setVisible(true);
         treePanel.setEnabled(true);
         //this.add(treePanel, BorderLayout.CENTER);
 
+        // Build the life Panel
         LifeTablePanel lifePanel = new LifeTablePanel();
         lifePanel.setVisible(false);
         lifePanel.setEnabled(false);
 
+        // Build the Closure Panel
         ClosurePanel closurePanel = new ClosurePanel();
         closurePanel.setVisible(false);
         closurePanel.setEnabled(false);
 
+        //Build the Healing Panel
         HealingPanel healingPanel = new HealingPanel();
         healingPanel.setVisible(false);
         healingPanel.setEnabled(false);
 
+        // Build the Display Panel
         JPanel display = new DisplayPanel();
         display.add(treePanel);
         display.add(lifePanel);
@@ -38,34 +44,40 @@ public class DBMainWindow extends JFrame {
         display.add(healingPanel);
         this.add(display, BorderLayout.CENTER);
 
+        // An array list of the major panels to be added to the Navigation Panel
         ArrayList<JPanel> panels = new ArrayList<>();
         panels.add(treePanel);
         panels.add(lifePanel);
         panels.add(closurePanel);
         panels.add(healingPanel);
 
+        // Builds the Navigation Panel.
         NavigationPanel nav = new NavigationPanel(panels);
         this.add(nav, BorderLayout.WEST);
 
         //nav.addPanel(treePanel);
     }
 
+
+    // Contains the Exceptions and the main functions fo build the whole GUI frame during  runtime.
     public static void main(String[] args) throws ExecutionException, IOException, InterruptedException, TimeoutException {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
+                // Start up exceptions
                 try {
                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-                } catch (ClassNotFoundException e) {
+                } catch (ClassNotFoundException e) { // Exception
                     e.printStackTrace();
-                } catch (InstantiationException e) {
+                } catch (InstantiationException e) { // Exception
                     e.printStackTrace();
-                } catch (IllegalAccessException e) {
+                } catch (IllegalAccessException e) { // Exception
                     e.printStackTrace();
-                } catch (UnsupportedLookAndFeelException e) {
+                } catch (UnsupportedLookAndFeelException e) { // Exception
                     e.printStackTrace();
                 }
 
+                // Building the GUI and the exception for the GUI
                 JFrame window = null;
                 try {
                     window = new DBMainWindow();
@@ -78,15 +90,15 @@ public class DBMainWindow extends JFrame {
                     window.pack();
                     window.setVisible(true);
                     window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                } catch (ExecutionException e) {
+                } catch (ExecutionException e) { // Exception
                     e.printStackTrace();
-                } catch (JsonProcessingException e) {
+                } catch (JsonProcessingException e) { // Exception
                     e.printStackTrace();
-                } catch (InterruptedException e) {
+                } catch (InterruptedException e) { // Exception
                     e.printStackTrace();
-                } catch (TimeoutException e) {
+                } catch (TimeoutException e) { // Exception
                     e.printStackTrace();
-                } catch (IOException e) {
+                } catch (IOException e) { // Exception
                     e.printStackTrace();
                 }
             }
