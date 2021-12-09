@@ -11,6 +11,7 @@ public class ClosurePanel extends JPanel {
         super();
         //img.setBackground(Color.WHITE);
         this.setOpaque(false);
+        this.setLayout(new SpringLayout());
         //ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("logo.png"));
         BufferedImage bImg = ImageIO.read(getClass().getClassLoader().getResource("closure_averages.PNG"));
         Image img = bImg.getScaledInstance(600, 400, Image.SCALE_SMOOTH);
