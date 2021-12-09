@@ -6,6 +6,7 @@ import com.nsfdb.api.analytics.aggregations.FamilyTreeNode;
 import com.nsfdb.api.models.Monkey;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -17,6 +18,7 @@ import java.util.concurrent.TimeoutException;
 public class FamilyTreePanel extends JPanel {
     private JTree tree;
     MonkeyDetailsPanel detailsPanel;
+    BoneDataPanel bonePanel;
 
     public FamilyTreePanel() throws JsonProcessingException, ExecutionException, InterruptedException, TimeoutException {
         super(new GridLayout(1,0));
@@ -26,6 +28,7 @@ public class FamilyTreePanel extends JPanel {
         this.setMinimumSize(windowSize);
 
         detailsPanel = new MonkeyDetailsPanel();
+        bonePanel = new BoneDataPanel();
 
         //DefaultMutableTreeNode top = new DefaultMutableTreeNode("Monkeys");
         //FamilyTreeNode top = new FamilyTreeNode(new Monkey());
@@ -74,12 +77,28 @@ public class FamilyTreePanel extends JPanel {
             }
         });
 
+        // create panels
         JScrollPane treeView = new JScrollPane(tree);
         JPanel treePanel = new JPanel();
+        JPanel dataPanel = new JPanel();
+
+        //create layout
+        FlowLayout layout = (FlowLayout)dataPanel.getLayout();
+        layout.setHgap(0);
+        layout.setVgap(0);
+
+        // create border for panels
+        Border blackLine = BorderFactory.createLineBorder(Color.BLACK,1);
+        detailsPanel.setBorder(blackLine);
+        //bonePanel.setBorder(blackLine);
+
         treePanel.add(treeView);
+        dataPanel.add(detailsPanel,BorderLayout.NORTH);
+        dataPanel.add(bonePanel,BorderLayout.SOUTH);
 
         this.add(treeView, BorderLayout.WEST);
-        this.add(detailsPanel, BorderLayout.EAST);
+        this.add(dataPanel, BorderLayout.EAST);
+
     }
 
     private void fillTree(FamilyTreeNode root) {
