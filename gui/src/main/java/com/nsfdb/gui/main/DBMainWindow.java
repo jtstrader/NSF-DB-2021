@@ -15,6 +15,9 @@ import java.util.concurrent.TimeoutException;
 public class DBMainWindow extends JFrame {
     public DBMainWindow() throws ExecutionException, IOException, InterruptedException, TimeoutException {
 
+        // Application currently doesn't support resizing
+        this.setResizable(false);
+
         // Build the Family Tree Panel
         FamilyTreePanel treePanel = new FamilyTreePanel();
         treePanel.setVisible(true);

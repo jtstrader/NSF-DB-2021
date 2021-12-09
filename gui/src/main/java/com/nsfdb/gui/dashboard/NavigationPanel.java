@@ -9,11 +9,12 @@ import java.util.ArrayList;
 
 public class NavigationPanel extends JPanel {
     ArrayList<JPanel> panelList;
+    int PANEL_WIDTH = 120;
     public NavigationPanel(ArrayList<JPanel> panelList) throws IOException {
         this.panelList = panelList;
         //this.setLayout(null);
         // Top level panel is 1 pixel less in width to hide white line.
-        Dimension windowSize = new Dimension(99, 400);
+        Dimension windowSize = new Dimension(PANEL_WIDTH - 1, 400);
         this.setPreferredSize(windowSize);
         this.setMaximumSize(windowSize);
         this.setMinimumSize(windowSize);
@@ -23,7 +24,7 @@ public class NavigationPanel extends JPanel {
         // Creates a Panel for the top level buttons
         JPanel butPanel = new JPanel();
         butPanel.setLayout(new GridLayout(6, 1, 0, 0));
-        butPanel.setPreferredSize(new Dimension(100, 300));
+        butPanel.setPreferredSize(new Dimension(PANEL_WIDTH, 300));
         //butPanel.setBackground(Color.WHITE);
         butPanel.setOpaque(false);
         // A panel to display the NSF Logo in the top left
@@ -33,7 +34,7 @@ public class NavigationPanel extends JPanel {
 
         // Creates a panel to contain the top level buttons and submenu buttons
         JPanel mainNav = new JPanel();
-        windowSize = new Dimension(100, 300);
+        windowSize = new Dimension(120, 300);
         mainNav.setLayout(new OverlayLayout(mainNav));
         mainNav.setPreferredSize(windowSize);
         mainNav.setMaximumSize(windowSize);
