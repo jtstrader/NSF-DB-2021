@@ -30,6 +30,7 @@ public class LifeTablePanel extends JPanel {
         };
 
         JScrollPane sp = new JScrollPane(lifeTable);
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(sp);
     }
 
