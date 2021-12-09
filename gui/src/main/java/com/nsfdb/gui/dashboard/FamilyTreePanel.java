@@ -7,6 +7,7 @@ import com.nsfdb.api.models.Monkey;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -88,9 +89,11 @@ public class FamilyTreePanel extends JPanel {
         layout.setVgap(0);
 
         // create border for panels
-        Border blackLine = BorderFactory.createLineBorder(Color.BLACK,1);
-        detailsPanel.setBorder(blackLine);
-        //bonePanel.setBorder(blackLine);
+        Border empty = BorderFactory.createEmptyBorder(0, -1, 0, -1);
+        Border grayLine = BorderFactory.createLineBorder(new Color(130, 135, 144),1);
+        Border topAndBotBorder = new CompoundBorder(empty, grayLine);
+        detailsPanel.setBorder(topAndBotBorder);
+        //bonePanel.setBorder(grayLine);
 
         treePanel.add(treeView);
         dataPanel.add(detailsPanel,BorderLayout.NORTH);
