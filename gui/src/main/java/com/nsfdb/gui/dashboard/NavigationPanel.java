@@ -170,13 +170,13 @@ public class NavigationPanel extends JPanel {
                 if(model.isPressed()) {
                     setVisiblePanel(panelList.get(1));
 
-                    mainNav.setVisible(true);
-                    mainNav.setEnabled(true);
+//                    mainNav.setVisible(true);
+//                    mainNav.setEnabled(true);
+//
+//                    popupNav.setEnabled(false);
+//                    popupNav.setVisible(false);
 
-                    popupNav.setEnabled(false);
-                    popupNav.setVisible(false);
-
-                    setPanelColor(Color.WHITE);
+//                    setPanelColor(Color.WHITE);
                 }
                 else if(model.isRollover()) {
                     lifeTableBut.setBackground(Color.WHITE);
@@ -203,13 +203,13 @@ public class NavigationPanel extends JPanel {
                 if(model.isPressed()) {
                     setVisiblePanel(panelList.get(2));
 
-                    mainNav.setVisible(true);
-                    mainNav.setEnabled(true);
+//                    mainNav.setVisible(true);
+//                    mainNav.setEnabled(true);
+//
+//                    popupNav.setEnabled(false);
+//                    popupNav.setVisible(false);
 
-                    popupNav.setEnabled(false);
-                    popupNav.setVisible(false);
-
-                    setPanelColor(Color.WHITE);
+//                    setPanelColor(Color.WHITE);
                 }
                 else if(model.isRollover()) {
                     suturesGraph.setBackground(Color.WHITE);
@@ -236,13 +236,13 @@ public class NavigationPanel extends JPanel {
                 if(model.isPressed()) {
                     setVisiblePanel(panelList.get(3));
 
-                    mainNav.setVisible(true);
-                    mainNav.setEnabled(true);
+//                    mainNav.setVisible(true);
+//                    mainNav.setEnabled(true);
+//
+//                    popupNav.setEnabled(false);
+//                    popupNav.setVisible(false);
 
-                    popupNav.setEnabled(false);
-                    popupNav.setVisible(false);
-
-                    setPanelColor(Color.WHITE);
+//                    setPanelColor(Color.WHITE);
                 }
                 else if(model.isRollover()) {
                     healingBut.setBackground(Color.WHITE);
