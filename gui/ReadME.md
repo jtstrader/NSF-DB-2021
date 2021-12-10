@@ -53,15 +53,15 @@ Panels...
 
 - **SetPanelColor**
 
-
+ Sets the background color of the navigation panel.
 
 - **CreateAnalyticsPopup**
 
-
+ Builds the popup panel for the analytics options. These option allows for access of the Life table, healing table and the Suturare Chart. 
 
 - **SetVisiblePanel**
 
-
+  
 
 - **isOptimizedDrawingEnabled**
 
@@ -94,7 +94,7 @@ Contains the following:
 
 - **LifeTablePanel Class**
         
-
+    
 
 - **LifeTreePanel method**     
         
@@ -129,9 +129,21 @@ Contains the following:
 
 
 
+
+
 ****
 
 Photos...
+--
+
+![image](https://user-images.githubusercontent.com/83418612/145452154-d44adfb7-60b9-4b53-a115-6aee7d975686.png)
+![image](https://user-images.githubusercontent.com/83418612/145452195-a7cfc09c-dd88-4b44-a95e-413514c770f5.png)
+
+
+
+****
+
+Resources..
 --
 **NFS DB Logo**
 
