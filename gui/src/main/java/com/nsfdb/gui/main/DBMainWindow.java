@@ -1,6 +1,7 @@
 package com.nsfdb.gui.main;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.nsfdb.api.analytics.aggregations.FamilyTree;
 import com.nsfdb.gui.dashboard.*;
 
 import javax.swing.*;
@@ -18,8 +19,11 @@ public class DBMainWindow extends JFrame {
         // Application currently doesn't support resizing
         this.setResizable(false);
 
+        FamilyTree myTree = new FamilyTree();
+        myTree.create();
+
         // Build the Family Tree Panel
-        FamilyTreePanel treePanel = new FamilyTreePanel();
+        FamilyTreePanel treePanel = new FamilyTreePanel(myTree);
         treePanel.setVisible(true);
         treePanel.setEnabled(true);
         //this.add(treePanel, BorderLayout.CENTER);
@@ -39,12 +43,18 @@ public class DBMainWindow extends JFrame {
         healingPanel.setVisible(false);
         healingPanel.setEnabled(false);
 
+        // Build the Monkey Table Panel
+        MonkeyTablePanel monkeyPanel = new MonkeyTablePanel(myTree);
+        monkeyPanel.setVisible(false);
+        monkeyPanel.setEnabled(false);
+
         // Build the Display Panel
         JPanel display = new DisplayPanel();
         display.add(treePanel);
         display.add(lifePanel);
         display.add(closurePanel);
         display.add(healingPanel);
+        display.add(monkeyPanel);
         this.add(display, BorderLayout.CENTER);
 
         // An array list of the major panels to be added to the Navigation Panel
@@ -53,6 +63,7 @@ public class DBMainWindow extends JFrame {
         panels.add(lifePanel);
         panels.add(closurePanel);
         panels.add(healingPanel);
+        panels.add(monkeyPanel);
 
         // Builds the Navigation Panel.
         NavigationPanel nav = new NavigationPanel(panels);

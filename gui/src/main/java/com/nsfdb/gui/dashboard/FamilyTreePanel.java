@@ -21,7 +21,7 @@ public class FamilyTreePanel extends JPanel {
     MonkeyDetailsPanel detailsPanel;
     BoneDataPanel bonePanel;
 
-    public FamilyTreePanel() throws JsonProcessingException, ExecutionException, InterruptedException, TimeoutException {
+    public FamilyTreePanel(FamilyTree myTree) throws JsonProcessingException, ExecutionException, InterruptedException, TimeoutException {
         super(new GridLayout(1,0));
         Dimension windowSize = new Dimension(600, 400);
         this.setPreferredSize(windowSize);
@@ -39,8 +39,8 @@ public class FamilyTreePanel extends JPanel {
 
         //viewTest(top); // Tests the tree and the scroll feature
 
-        FamilyTree myTree = new FamilyTree();
-        myTree.create();
+        //FamilyTree myTree = new FamilyTree();
+        //myTree.create();
 
         /*for(int i = 0; i <myTree.getMonkeyList().size(); i++) {
             FamilyTreeNode root = myTree.getMonkeyList().get(i)[0];
@@ -54,7 +54,7 @@ public class FamilyTreePanel extends JPanel {
             top.add(root);
         }*/
 
-        myTree.printTree();
+        //myTree.printTree();
 
         //tree = new JTree(top);
         tree = new JTree(myTree.treeify());
