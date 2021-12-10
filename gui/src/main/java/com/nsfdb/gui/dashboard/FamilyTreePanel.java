@@ -88,7 +88,7 @@ public class FamilyTreePanel extends JPanel {
         layout.setHgap(0);
         layout.setVgap(0);
 
-        // create border for panels
+        // create border for details panel panels
         Border empty = BorderFactory.createEmptyBorder(0, -1, 0, -1);
         Border grayLine = BorderFactory.createLineBorder(new Color(130, 135, 144),1);
         Border topAndBotBorder = new CompoundBorder(empty, grayLine);

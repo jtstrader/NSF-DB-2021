@@ -9,6 +9,7 @@ import java.io.IOException;
 public class ClosurePanel extends JPanel {
     public ClosurePanel() throws IOException {
         super();
+        // Gets the static image from resources and adds it to A JPanel to display
         //img.setBackground(Color.WHITE);
         this.setOpaque(false);
         this.setLayout(new SpringLayout());

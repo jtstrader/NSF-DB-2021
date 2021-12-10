@@ -11,7 +11,7 @@ public class MonkeyTablePanel extends JPanel {
     JTable monkeyTable;
 
     public MonkeyTablePanel(FamilyTree myTree) throws JsonProcessingException, InterruptedException {
-        // Gets the columns and data Arrays from the LifeTable class and adds it to a JTable
+        // Creates a 2D array from the FamilyTree class and adds it to a JTable
         LifeTable tableData = new LifeTable();
         String columns[] = {"Animal ID", "Date of Birth", "Date of Death", "Gender", "Mom", "Status"};
 
@@ -33,7 +33,9 @@ public class MonkeyTablePanel extends JPanel {
     }
 
     private void getMonkeyArray(ArrayList<FamilyTreeNode[]> monkeyList, String[][] data) {
+        // Gets all the monkeys and adds them to an array
         int[] pos = {0};
+        // For loop that goes through the founders and adds them to the array and also adds the monkeys below them
         for(FamilyTreeNode[] familyTreeNodes : monkeyList) {
             data[pos[0]][0] = familyTreeNodes[0].getMonkey().getAnimal_id();
             data[pos[0]][1] = familyTreeNodes[0].getMonkey().getDate_of_birth().toString();
@@ -45,10 +47,10 @@ public class MonkeyTablePanel extends JPanel {
             pos[0]++;
             getMonkeyArrayNodes(familyTreeNodes[0], data, pos);
         }
-        System.out.println(pos[0]);
     }
 
     private void getMonkeyArrayNodes(FamilyTreeNode root, String[][] data, int[] pos) {
+        // Recursively gets the first child of the root, as well as the child's siblings and those below them.
         if(root.getChild()[0] != null) {
             data[pos[0]][0] = root.getChild()[0].getMonkey().getAnimal_id();
             data[pos[0]][1] = root.getChild()[0].getMonkey().getDate_of_birth().toString();
@@ -64,6 +66,7 @@ public class MonkeyTablePanel extends JPanel {
     }
 
     private void getMonkeyArraySiblings(FamilyTreeNode root, String[][] data, int[] pos) {
+        // Recursively gets the sibling of the root monkey
         if(root.getSibling()[0] != null) {
             data[pos[0]][0] = root.getSibling()[0].getMonkey().getAnimal_id();
             data[pos[0]][1] = root.getSibling()[0].getMonkey().getDate_of_birth().toString();
@@ -78,7 +81,7 @@ public class MonkeyTablePanel extends JPanel {
         }
     }
 
-    // Test the LifeTablePanel class by creating a JFrame and adding a LifeTablePanel to it
+    // Test the MonkeyTablePanel class by creating a JFrame and adding a MonkeyTablePanel to it
     public static void main(String[] args) throws JsonProcessingException, InterruptedException {
         JFrame f = new JFrame();
         FamilyTree myTree = new FamilyTree();

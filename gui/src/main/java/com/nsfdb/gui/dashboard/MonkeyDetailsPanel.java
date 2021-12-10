@@ -17,6 +17,7 @@ public class MonkeyDetailsPanel extends JPanel {
     JLabel momLabel;
     JLabel statusLabel;
 
+    // This JPanel will be created inside the FamilyTreePanel
     public void setMonkey(Monkey monkey) {
         this.monkey = monkey;
         String id = "Animal ID: " + monkey.getAnimal_id();
