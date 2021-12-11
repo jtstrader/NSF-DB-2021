@@ -108,6 +108,8 @@ Panels...
    It also contains the dimension window size. It also contains the button creation and the submenu buttons. 
    Gets the images and resize them to if into the panel. 
    
+   ![nav1](https://user-images.githubusercontent.com/83418612/145680129-e21e9ed2-46eb-4e9f-95c8-37e0f71879d4.png)
+
 
 - **SetPanelColor**
 
@@ -144,6 +146,9 @@ Panels...
             }
         });
         popupNav.add(healingBut);
+
+![nav2](https://user-images.githubusercontent.com/83418612/145680122-e4e0876c-41bf-4f0a-8639-10bd27001cb8.png)
+
 
 
 --FamilyTreePanel--
@@ -194,6 +199,9 @@ Contains the following:
 
     The ViewTest method is used to fill a test/place holder tree until the Anayltics had completed the FamilyTree Class. 
 
+![unknown](https://user-images.githubusercontent.com/83418612/145679953-c3ef2a83-d8be-4c66-b9f2-00ac1caa3442.png)
+
+
 
 --LifeTablePanel--
 
@@ -211,6 +219,7 @@ Contains the following:
         
   The Main method is for testing thr Lifetablepanel class and making sure it will out put what is needed, into a JFrame. 
 
+![unknown](https://user-images.githubusercontent.com/83418612/145679962-85c06972-191c-4891-964b-9431cf1c8482.png)
 
 
 --MonkeyDetialsPanel--
@@ -228,6 +237,7 @@ Contains the following:
 - **MonkeyDetialsPanel**    
         
 
+![unknown1](https://user-images.githubusercontent.com/83418612/145680028-62c218b1-0487-4487-a6e9-33230d5d934c.png)
 
 --HealingPanel--
 
@@ -238,6 +248,7 @@ Contains the following:
  - **HealingPanel**
 
   The healing method is for a simple static image of the Measurement chart. 
+  
   ![image](https://user-images.githubusercontent.com/83418612/145452154-d44adfb7-60b9-4b53-a115-6aee7d975686.png)
 
 
@@ -248,9 +259,10 @@ Contains the following:
 
   The closure panel class contains the closure method, which is an extension of the JPanel class. 
   
- -** Closure**
+ - **Closure**
 
   The closure method is for a simple static image of the Suture chart. 
+  
   ![Screenshot_624](https://user-images.githubusercontent.com/83418612/145585222-eee6a63c-fa6f-44a1-a2e7-5a6d9234da3b.png)
   
   
@@ -269,7 +281,8 @@ Contains the following:
   
  the
  
- 
+ ![unknown2](https://user-images.githubusercontent.com/83418612/145680037-9844b39f-9ab9-4d01-a3b3-98ecc8db3182.png)
+
  
  --MonkeyTablePanel--
  
@@ -293,7 +306,10 @@ Contains the following:
  
  
  
- - **Main**
+ - **Main**!
+ 
+ [unknown](https://user-images.githubusercontent.com/83418612/145680047-6252b459-57f2-4dcd-8e9f-bbb8553603ee.png)
+
 
 ****
 
