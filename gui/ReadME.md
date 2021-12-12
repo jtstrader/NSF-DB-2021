@@ -228,22 +228,69 @@ Contains the following:
 
 - **MonkeyDetailsPanel class**    
         
-
+The Monkey Details Panel class contains the setMonkey and Monkey Detial Panel method, which is an extension of the JPanel class. 
+It also contains the following variables labels: Monkey, ID, Brith, Death, gender, mom, and status.
 
 - **setMonkey**    
         
+The SetMonkey method takes in the monkey and sets the following variable data. Monkey, ID, Brith, Death, gender, mom, and status
 
+        String id = "Animal ID: " + monkey.getAnimal_id();
+        idLabel.setText(id);
+
+        String birth = "Date of Birth: " + monkey.getDate_of_birth();
+        birthLabel.setText(birth);
+
+        //System.out.println(monkey.getDate_of_death());
+        if(monkey.getDate_of_death() == null) {
+            deathLabel.setVisible(false);
+            this.repaint();
+        }
+        else {
+            String death = "Date of Death: " + monkey.getDate_of_death();
+            deathLabel.setText(death);
+            deathLabel.setVisible(true);
+        }
+        String gender = "Gender: " + monkey.getSex();
+        genderLabel.setText(gender);
+
+        String momId = "Mom: " + monkey.getBehavior_mom();
+        momLabel.setText(momId);
+
+        String status = "Status: " + monkey.getStatus();
+        statusLabel.setText(status);
+    }
 
 - **MonkeyDetialsPanel**    
-        
+    
+   The Monkey Detial panel sets the panel size, and defualt vaules of the labe variables. This method also as different sections for creating the label, and in certain case making the label clickable. For example the momLabel
+   
+         Dimension windowSize = new Dimension(350, 200);
+        this.setPreferredSize(windowSize);
+        this.setMaximumSize(windowSize);
+        this.setMinimumSize(windowSize);
 
-![unknown1](https://user-images.githubusercontent.com/83418612/145680028-62c218b1-0487-4487-a6e9-33230d5d934c.png)
+        String id = "Animal ID";
+        String birth = "Date of Birth";
+        String death = null;
+        String gender = "Gender";
+        String momId = "Mom";
+        String status = "Status";
+
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        // Creates label to display the ID
+        idLabel = new JLabel(id);
+        idLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.add(idLabel);
+
+ ![unknown1](https://user-images.githubusercontent.com/83418612/145680028-62c218b1-0487-4487-a6e9-33230d5d934c.png)
 
 --HealingPanel--
 
  - **The HealingPanel Class**
 
-  The healing panel class contains the closure method, which is an extension of the JPanel class. 
+  The healing panel class contains the healing panel method, which is an extension of the JPanel class. 
   
  - **HealingPanel**
 
@@ -269,44 +316,169 @@ Contains the following:
  --BoneDatePanel--
 
 
- - **The BoneDatePanel Class**
+ - **The BoneDataPanel Class**
 
-  The 
+  The Bone data Panel class contains the setMonkey and Bone Data Panel method, which is an extension of the JPanel class. 
+It also contains the following variables labels: Monkey, ID, Brith, Death, gender, mom, and status.
   
  - **Set Monkey**
 
-  The 
+  The SetMonkey method takes in the monkey and sets the following variable data. Monkey, ID, Brith, Death, gender, mom, and status
+    
+        this.monkey = monkey;
+        String id = "Animal ID: " + monkey.getAnimal_id();
+        idLabel.setText(id);
+
+        String birth = "Date of Birth: " + monkey.getDate_of_birth();
+        birthLabel.setText(birth);
+
+        System.out.println(monkey.getDate_of_death());
+        if(monkey.getDate_of_death() == null) {
+            deathLabel.setVisible(false);
+            this.repaint();
+        }
+        else {
+            String death = "Date of Death: " + monkey.getDate_of_death();
+            deathLabel.setText(death);
+            deathLabel.setVisible(true);
+        }
+        String gender = "Gender: " + monkey.getSex();
+        genderLabel.setText(gender);
+
+        String momId = "Mom: " + monkey.getBehavior_mom();
+        momLabel.setText(momId);
+
+        String status = "Status: " + monkey.getStatus();
+        statusLabel.setText(status);
+    }
   
-  - **BoneDatePanel**
+  - **BoneDataPanel**
   
- the
+ The BoneData panel sets the panel size, and defualt vaules of the labe variables. This method also as different sections for creating the label, and in certain case making    the label clickable. For example the momLabel
+ 
+        JScrollPane scrollPane = new JScrollPane();
+        Dimension windowSize = new Dimension(350, 200);
+        this.setPreferredSize(windowSize);
+        this.setMaximumSize(windowSize);
+        this.setMinimumSize(windowSize);
+
+        String id = "Bones";
+        String birth = "Bones";
+        String death = null;
+        String gender = "Bones";
+        String momId = "Bones";
+        String status = "Bones";
+
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
+        // Creates label to display the ID
+        idLabel = new JLabel(id);
+        idLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.add(idLabel);
  
  ![unknown2](https://user-images.githubusercontent.com/83418612/145680037-9844b39f-9ab9-4d01-a3b3-98ecc8db3182.png)
 
  
  --MonkeyTablePanel--
  
- -** MonkeyTablePanel Class**
+ - **MonkeyTablePanel Class**
  
- 
+ The MonkeyTable Panel class contains the MonkeyTable Panel, Get Monkey Array, GetMonkeyNode, and GetMonkey method, which is an extension of the JPanel class. 
+ It also contains a JTable variable.
  
  - **MonkeyTablePanel**
 
+The MonkeyTable Panel creates the table with the following columns: Animal ID, Date of Brith, Date of Death, Gender, Mom, and Status. The method also pulls in an object from the Family Tree class. Since the Family tree class is an arraylist, it can be pulled in with a 2 dimensional string list into the getMonkeyArray method. 
 
+
+    public MonkeyTablePanel(FamilyTree myTree) throws JsonProcessingException, InterruptedException {
+        // Creates a 2D array from the FamilyTree class and adds it to a JTable
+        LifeTable tableData = new LifeTable();
+        String columns[] = {"Animal ID", "Date of Birth", "Date of Death", "Gender", "Mom", "Status"};
+
+        ArrayList<FamilyTreeNode[]> monkeyList = myTree.getMonkeyList();
+        String data[][] = new String[myTree.size()][6];
+
+        getMonkeyArray(monkeyList, data);
+
+        monkeyTable = new JTable(data, columns) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
+        JScrollPane sp = new JScrollPane(monkeyTable);
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.add(sp);
 
  - **GetMonkeyArray**
+
+ Gets all of the monkeys. It also goes through the founders and adds them to an array list followed by adding the monkeys bellow them. 
  
+ 
+    private void getMonkeyArray(ArrayList<FamilyTreeNode[]> monkeyList, String[][] data) {
+        // Gets all the monkeys and adds them to an array
+        int[] pos = {0};
+        // For loop that goes through the founders and adds them to the array and also adds the monkeys below them
+        for(FamilyTreeNode[] familyTreeNodes : monkeyList) {
+            data[pos[0]][0] = familyTreeNodes[0].getMonkey().getAnimal_id();
+            data[pos[0]][1] = familyTreeNodes[0].getMonkey().getDate_of_birth().toString();
+            data[pos[0]][2] = (familyTreeNodes[0].getMonkey().getDate_of_death() != null)
+                                    ? familyTreeNodes[0].getMonkey().getDate_of_death().toString() : "null";
+            data[pos[0]][3] = familyTreeNodes[0].getMonkey().getSex();
+            data[pos[0]][4] = familyTreeNodes[0].getMonkey().getBehavior_mom();
+            data[pos[0]][5] = familyTreeNodes[0].getMonkey().getStatus();
+            pos[0]++;
+            getMonkeyArrayNodes(familyTreeNodes[0], data, pos);
+        }
  
  
  - **GetMonkeyNodes **
+  
+ An recursive get function to get the 1st child of the root, and all of the child's siblings and those below them. 
  
- 
+    private void getMonkeyArrayNodes(FamilyTreeNode root, String[][] data, int[] pos) {
+        // Recursively gets the first child of the root, as well as the child's siblings and those below them.
+        if(root.getChild()[0] != null) {
+            data[pos[0]][0] = root.getChild()[0].getMonkey().getAnimal_id();
+            data[pos[0]][1] = root.getChild()[0].getMonkey().getDate_of_birth().toString();
+            data[pos[0]][2] = (root.getChild()[0].getMonkey().getDate_of_death() != null)
+                                ? root.getChild()[0].getMonkey().getDate_of_death().toString() : "null";
+            data[pos[0]][3] = root.getChild()[0].getMonkey().getSex();
+            data[pos[0]][4] = root.getChild()[0].getMonkey().getBehavior_mom();
+            data[pos[0]][5] = root.getChild()[0].getMonkey().getStatus();
+            pos[0]++;
+            getMonkeyArraySiblings(root.getChild()[0], data, pos);
+            getMonkeyArrayNodes(root.getChild()[0], data, pos);
+        }
+    }
  
  -** GetMonkeySibling **
- 
- 
- 
+
+Recursivelt gets the siblings of the root monkey. 
+
+
+    private void getMonkeyArraySiblings(FamilyTreeNode root, String[][] data, int[] pos) {
+        // Recursively gets the sibling of the root monkey
+        if(root.getSibling()[0] != null) {
+            data[pos[0]][0] = root.getSibling()[0].getMonkey().getAnimal_id();
+            data[pos[0]][1] = root.getSibling()[0].getMonkey().getDate_of_birth().toString();
+            data[pos[0]][2] = (root.getSibling()[0].getMonkey().getDate_of_death() != null)
+                                ? root.getSibling()[0].getMonkey().getDate_of_death().toString() : "null";
+            data[pos[0]][3] = root.getSibling()[0].getMonkey().getSex();
+            data[pos[0]][4] = root.getSibling()[0].getMonkey().getBehavior_mom();
+            data[pos[0]][5] = root.getSibling()[0].getMonkey().getStatus();
+            pos[0]++;
+            getMonkeyArrayNodes(root.getSibling()[0], data, pos);
+            getMonkeyArraySiblings(root.getSibling()[0], data, pos);
+        }
+    }
+
+
  - **Main**!
+ 
+ The Main is for testing the building of the table.
  
  [unknown](https://user-images.githubusercontent.com/83418612/145680047-6252b459-57f2-4dcd-8e9f-bbb8553603ee.png)
 
