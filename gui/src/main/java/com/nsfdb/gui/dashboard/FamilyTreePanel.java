@@ -6,6 +6,8 @@ import com.nsfdb.api.analytics.aggregations.FamilyTreeNode;
 import com.nsfdb.api.models.Monkey;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.CompoundBorder;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -17,8 +19,9 @@ import java.util.concurrent.TimeoutException;
 public class FamilyTreePanel extends JPanel {
     private JTree tree;
     MonkeyDetailsPanel detailsPanel;
+    BoneDataPanel bonePanel;
 
-    public FamilyTreePanel() throws JsonProcessingException, ExecutionException, InterruptedException, TimeoutException {
+    public FamilyTreePanel(FamilyTree myTree) throws JsonProcessingException, ExecutionException, InterruptedException, TimeoutException {
         super(new GridLayout(1,0));
         Dimension windowSize = new Dimension(600, 400);
         this.setPreferredSize(windowSize);
@@ -26,6 +29,7 @@ public class FamilyTreePanel extends JPanel {
         this.setMinimumSize(windowSize);
 
         detailsPanel = new MonkeyDetailsPanel();
+        bonePanel = new BoneDataPanel();
 
         //DefaultMutableTreeNode top = new DefaultMutableTreeNode("Monkeys");
         //FamilyTreeNode top = new FamilyTreeNode(new Monkey());
@@ -35,8 +39,8 @@ public class FamilyTreePanel extends JPanel {
 
         //viewTest(top); // Tests the tree and the scroll feature
 
-        FamilyTree myTree = new FamilyTree();
-        myTree.create();
+        //FamilyTree myTree = new FamilyTree();
+        //myTree.create();
 
         /*for(int i = 0; i <myTree.getMonkeyList().size(); i++) {
             FamilyTreeNode root = myTree.getMonkeyList().get(i)[0];
@@ -50,7 +54,7 @@ public class FamilyTreePanel extends JPanel {
             top.add(root);
         }*/
 
-        myTree.printTree();
+        //myTree.printTree();
 
         //tree = new JTree(top);
         tree = new JTree(myTree.treeify());
@@ -74,9 +78,30 @@ public class FamilyTreePanel extends JPanel {
             }
         });
 
+        // create panels
         JScrollPane treeView = new JScrollPane(tree);
+        JPanel treePanel = new JPanel();
+        JPanel dataPanel = new JPanel();
+
+        //create layout
+        FlowLayout layout = (FlowLayout)dataPanel.getLayout();
+        layout.setHgap(0);
+        layout.setVgap(0);
+
+        // create border for details panel panels
+        Border empty = BorderFactory.createEmptyBorder(0, -1, 0, -1);
+        Border grayLine = BorderFactory.createLineBorder(new Color(130, 135, 144),1);
+        Border topAndBotBorder = new CompoundBorder(empty, grayLine);
+        detailsPanel.setBorder(topAndBotBorder);
+        //bonePanel.setBorder(grayLine);
+
+        treePanel.add(treeView);
+        dataPanel.add(detailsPanel,BorderLayout.NORTH);
+        dataPanel.add(bonePanel,BorderLayout.SOUTH);
+
         this.add(treeView, BorderLayout.WEST);
-        this.add(detailsPanel, BorderLayout.EAST);
+        this.add(dataPanel, BorderLayout.EAST);
+
     }
 
     private void fillTree(FamilyTreeNode root) {

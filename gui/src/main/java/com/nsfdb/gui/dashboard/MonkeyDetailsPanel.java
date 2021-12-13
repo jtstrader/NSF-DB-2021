@@ -17,6 +17,7 @@ public class MonkeyDetailsPanel extends JPanel {
     JLabel momLabel;
     JLabel statusLabel;
 
+    // This JPanel will be created inside the FamilyTreePanel
     public void setMonkey(Monkey monkey) {
         this.monkey = monkey;
         String id = "Animal ID: " + monkey.getAnimal_id();
@@ -25,7 +26,7 @@ public class MonkeyDetailsPanel extends JPanel {
         String birth = "Date of Birth: " + monkey.getDate_of_birth();
         birthLabel.setText(birth);
 
-        System.out.println(monkey.getDate_of_death());
+        //System.out.println(monkey.getDate_of_death());
         if(monkey.getDate_of_death() == null) {
             deathLabel.setVisible(false);
             this.repaint();
@@ -46,7 +47,7 @@ public class MonkeyDetailsPanel extends JPanel {
     }
 
     public MonkeyDetailsPanel() {
-        Dimension windowSize = new Dimension(250, 400);
+        Dimension windowSize = new Dimension(350, 200);
         this.setPreferredSize(windowSize);
         this.setMaximumSize(windowSize);
         this.setMinimumSize(windowSize);

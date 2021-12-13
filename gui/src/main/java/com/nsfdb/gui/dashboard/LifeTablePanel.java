@@ -22,8 +22,15 @@ public class LifeTablePanel extends JPanel {
                 dataBoxed[i][j] = data[i][j];
             }
         }
-        lifeTable = new JTable(dataBoxed, columns);
+        lifeTable = new JTable(dataBoxed, columns) {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+
         JScrollPane sp = new JScrollPane(lifeTable);
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.add(sp);
     }
 

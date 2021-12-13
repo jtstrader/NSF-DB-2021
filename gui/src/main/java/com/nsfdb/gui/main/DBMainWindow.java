@@ -1,68 +1,132 @@
 package com.nsfdb.gui.main;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.nsfdb.api.analytics.aggregations.FamilyTree;
 import com.nsfdb.gui.dashboard.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
 public class DBMainWindow extends JFrame {
-    public DBMainWindow() {
-        /*JMenuBar menuBar;
-        JMenu menu;
-        JMenuItem menuItem;
+    public DBMainWindow() throws ExecutionException, IOException, InterruptedException, TimeoutException {
 
-        menuBar = new JMenuBar();
+        // Application currently doesn't support resizing
+        this.setResizable(false);
 
-        // Build the file menu
-        menu = new JMenu("File");
-        menu.setMnemonic(KeyEvent.VK_1);
-        menuItem = new JMenuItem("Logout");
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(
-                KeyEvent.VK_L, ActionEvent.ALT_MASK
-        ));
-        menu.add(menuItem);
-        menuBar.add(menu);
+        FamilyTree myTree = new FamilyTree();
+        myTree.create();
 
-        // Build the edit menu
-        menu = new JMenu("Edit");
-        menu.setMnemonic(KeyEvent.VK_2);
-        menuItem = new JMenuItem("Temp");
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(
-                KeyEvent.VK_A, ActionEvent.ALT_MASK
-        ));
-        menu.add(menuItem);
-        menuBar.add(menu);
+        // Build the Family Tree Panel
+        // This will be the default display so it will be enabled at start
+        FamilyTreePanel treePanel = new FamilyTreePanel(myTree);
+        treePanel.setVisible(true);
+        treePanel.setEnabled(true);
+        //this.add(treePanel, BorderLayout.CENTER);
 
-        // Build the view menu
-        menu = new JMenu("View");
-        menu.setMnemonic(KeyEvent.VK_3);
-        menuItem = new JMenuItem("Temp");
-        menuItem.setAccelerator(KeyStroke.getKeyStroke(
-                KeyEvent.VK_B, ActionEvent.ALT_MASK
-        ));
-        menu.add(menuItem);
-        menuBar.add(menu);
+        // Build the life Panel
+        // This panel will be disabled at start so the FamilyTreePanel can be shown
+        // The navigation panel controls this
+        LifeTablePanel lifePanel = new LifeTablePanel();
+        lifePanel.setVisible(false);
+        lifePanel.setEnabled(false);
 
-        this.setJMenuBar(menuBar);*/
+        // Build the Closure Panel
+        // This panel will be disabled at start so the FamilyTreePanel can be shown
+        // The navigation panel controls this
+        ClosurePanel closurePanel = new ClosurePanel();
+        closurePanel.setVisible(false);
+        closurePanel.setEnabled(false);
+
+        //Build the Healing Panel
+        // This panel will be disabled at start so the FamilyTreePanel can be shown
+        // The navigation panel controls this
+        HealingPanel healingPanel = new HealingPanel();
+        healingPanel.setVisible(false);
+        healingPanel.setEnabled(false);
+
+        // Build the Monkey Table Panel
+        // This panel will be disabled at start so the FamilyTreePanel can be shown
+        // The navigation panel controls this
+        MonkeyTablePanel monkeyPanel = new MonkeyTablePanel(myTree);
+        monkeyPanel.setVisible(false);
+        monkeyPanel.setEnabled(false);
+
+        // Adds that other displays to the DisplayPanel, which is where they will be displayed
+        JPanel display = new DisplayPanel();
+        display.add(treePanel);
+        display.add(lifePanel);
+        display.add(closurePanel);
+        display.add(healingPanel);
+        display.add(monkeyPanel);
+        this.add(display, BorderLayout.CENTER);
+
+        // An array list of the major panels to be sent to
+        // the NavigationPanel so that it can enable and display them
+        // based on the buttons pressed
+        ArrayList<JPanel> panels = new ArrayList<>();
+        panels.add(treePanel);
+        panels.add(lifePanel);
+        panels.add(closurePanel);
+        panels.add(healingPanel);
+        panels.add(monkeyPanel);
+
+        // Builds the Navigation Panel.
+        NavigationPanel nav = new NavigationPanel(panels);
+        this.add(nav, BorderLayout.WEST);
+
+        //nav.addPanel(treePanel);
     }
-    public static void main(String[] args) throws JsonProcessingException, ExecutionException, InterruptedException, TimeoutException {
-        JFrame window = new DBMainWindow();
-        window.setTitle("Monkey DB");
 
-        FamilyTreePanel treePanel = new FamilyTreePanel();
-        window.add(treePanel, BorderLayout.CENTER);
 
-        //MonkeyDetailsPanel detailsPanel = new MonkeyDetailsPanel();
-        //window.add(detailsPanel, BorderLayout.EAST);
+    // Contains the Exceptions and the main functions fo build the whole GUI frame during  runtime.
+    public static void main(String[] args) throws ExecutionException, IOException, InterruptedException, TimeoutException {
+        SwingUtilities.invokeLater(new Runnable() {
+            @Override
+            public void run() {
+                // Sets the Appearance to that of Windows
+                try {
+                    UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+                } catch (ClassNotFoundException e) { // Exception
+                    e.printStackTrace();
+                } catch (InstantiationException e) { // Exception
+                    e.printStackTrace();
+                } catch (IllegalAccessException e) { // Exception
+                    e.printStackTrace();
+                } catch (UnsupportedLookAndFeelException e) { // Exception
+                    e.printStackTrace();
+                }
 
-        window.pack();
-        window.setVisible(true);
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                // Building the GUI and the exception for the GUI
+                JFrame window = null;
+                try {
+                    window = new DBMainWindow();
 
+                    window.setTitle("Monkey DB");
+
+                    //MonkeyDetailsPanel detailsPanel = new MonkeyDetailsPanel();
+                    //window.add(detailsPanel, BorderLayout.EAST);
+
+                    window.pack();
+                    window.setVisible(true);
+                    window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                } catch (ExecutionException e) { // Exception
+                    e.printStackTrace();
+                } catch (JsonProcessingException e) { // Exception
+                    e.printStackTrace();
+                } catch (InterruptedException e) { // Exception
+                    e.printStackTrace();
+                } catch (TimeoutException e) { // Exception
+                    e.printStackTrace();
+                } catch (IOException e) { // Exception
+                    e.printStackTrace();
+                }
+            }
+        });
     }
 }

@@ -23,6 +23,7 @@ public class FamilyTree {
     private FamilyTreeNode[] root;
     private ArrayList<Monkey> monkeyList;
     public int counter = 0;
+    private int size;
 
     // n-tree
     /*public class FamilyTreeNode extends DefaultMutableTreeNode {
@@ -170,6 +171,24 @@ public class FamilyTree {
         if(root[0].sibling[0] != null)
             printTree(root[0].sibling);
     }
+
+    public int size() {
+        size = 0;
+        for(FamilyTreeNode[] rt: RootList)
+            sizeRec(rt);
+        return size;
+    }
+
+    private void sizeRec(FamilyTreeNode[] root) {
+        size++;
+        if(root[0].child[0] != null)
+            sizeRec(root[0].child);
+
+        if(root[0].sibling[0] != null)
+            sizeRec(root[0].sibling);
+    }
+
+
 
     public FamilyTreeNode treeify() {
         Monkey fakeMonkey = new Monkey();
