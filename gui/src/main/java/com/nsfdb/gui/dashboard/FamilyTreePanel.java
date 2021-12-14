@@ -11,6 +11,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.event.TreeSelectionEvent;
 import javax.swing.event.TreeSelectionListener;
 import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeCellRenderer;
 import javax.swing.tree.TreeSelectionModel;
 import java.awt.*;
 import java.util.concurrent.ExecutionException;
@@ -58,7 +59,7 @@ public class FamilyTreePanel extends JPanel {
 
         //tree = new JTree(top);
         tree = new JTree(myTree.treeify());
-
+        tree.setCellRenderer(new MyRenderer());
         // Expands the tree to show all nodes
         for(int i = 0; i < tree.getRowCount(); i++) {
             tree.expandRow(i);
@@ -137,6 +138,58 @@ public class FamilyTreePanel extends JPanel {
 
         for(int i = 0; i <= 100; i++) {
             top.add(new DefaultMutableTreeNode("Filler"));
+        }
+    }
+
+    private class MyRenderer extends DefaultTreeCellRenderer {
+        Icon femaleIcon;
+        Icon maleIcon;
+        Icon unknownIcon;
+
+        public MyRenderer() {
+            ImageIcon femaleImageIcon = new ImageIcon(getClass().getClassLoader().getResource("FemaleMonkey.png"));
+            ImageIcon maleImageIcon = new ImageIcon(getClass().getClassLoader().getResource("MaleMonkey.png"));
+            ImageIcon unknownImageIcon = new ImageIcon(getClass().getClassLoader().getResource("UnknownMonkey.png"));
+
+            Image femaleImage = femaleImageIcon.getImage();
+            Image maleImage = maleImageIcon.getImage();
+            Image unknownImage = unknownImageIcon.getImage();
+
+            femaleImage = femaleImage.getScaledInstance(16, 13, Image.SCALE_SMOOTH);
+            maleImage = maleImage.getScaledInstance(16, 13, Image.SCALE_SMOOTH);
+            unknownImage = unknownImage.getScaledInstance(16, 13, Image.SCALE_SMOOTH);
+
+            femaleIcon = new ImageIcon(femaleImage);
+            maleIcon = new ImageIcon(maleImage);
+            unknownIcon = new ImageIcon(unknownImage);
+        }
+
+        @Override
+        public Component getTreeCellRendererComponent(JTree tree, Object value, boolean sel, boolean expanded,
+                                                    boolean leaf, int row, boolean hasFocus) {
+            super.getTreeCellRendererComponent(tree, value, sel,
+                                            expanded, leaf, row, hasFocus);
+            if(genderOf(value).equals("NULL")) {
+                setIcon(unknownIcon);
+            }
+            else if(genderOf(value).equals("M")) {
+                setIcon(maleIcon);
+            }
+            else {
+                setIcon(femaleIcon);
+            }
+
+            return this;
+        }
+
+        private String genderOf(Object value) {
+            DefaultMutableTreeNode node = (DefaultMutableTreeNode) value;
+            FamilyTreeNode familyTreeNode = (FamilyTreeNode) (node);
+
+            if(familyTreeNode.getMonkey().getSex() == null)
+                return "NULL";
+            else
+                return familyTreeNode.getMonkey().getSex();
         }
     }
 }
