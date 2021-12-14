@@ -4,7 +4,7 @@
 
 1. Clone the git repository
 
-2. Open the application in IntelliJ
+2. Open the folder in IntelliJ
     - If Intellij is not downloaded, go to this link to download it: https://www.jetbrains.com/idea/download/#section=windows 
     
 3. Start by running the pom.xml files in the api and gui folders.
