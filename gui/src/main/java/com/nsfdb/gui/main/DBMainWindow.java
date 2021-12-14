@@ -19,6 +19,10 @@ public class DBMainWindow extends JFrame {
         // Application currently doesn't support resizing
         this.setResizable(false);
 
+        // Sets Application Icon
+        Image icon = new ImageIcon(getClass().getClassLoader().getResource("logo.png")).getImage();
+        this.setIconImage(icon);
+
         FamilyTree myTree = new FamilyTree();
         myTree.create();
 
