@@ -22,9 +22,10 @@
     - Select Java 17 as the SDK and click 'Apply' at the bottom of the window to apply the SDK change and then 'OK' to close the window.
     
 5. Now, set the configuration for the API.
-    - Go to the top of the program 
-    - And click 'Edit Configuration'
+    - Navigate to the top of the IntelliJ window and click 'Add Configuration'
+    ![Screenshot (677)](https://user-images.githubusercontent.com/74464395/146064926-810dbb4f-7801-455f-8db8-18bb8b21c927.png)
     - Click the plus sign in the top left corner and then select 'Application' from the dropdown menu 
+    ![Screenshot (676)](https://user-images.githubusercontent.com/74464395/146064527-c3815136-92b6-4e5b-9a4f-534dee355bd4.png)
     - Put 'API' down as the name of the configuration
     - For the module, select '17 version 17.0.1'
     ![Screenshot (671)](https://user-images.githubusercontent.com/74464395/146056563-deb6854c-79b1-43de-a953-a1de608dee38.png)
@@ -36,3 +37,19 @@
       - Database name
       - Database username
       - Database password
+    - Click 'Apply' and then 'OK'
+    - Finally, go ahead and run the API by clicking the green arrow button to the right of the configuration manager.
+    ![Screenshot (674)](https://user-images.githubusercontent.com/74464395/146060110-c0723a37-31bd-432d-8125-fde03392c579.png)
+    - If you get an error running the API, verify that your environment variables are all spelled correctly.
+
+6. Now, set the GUI configuration.
+   - Go back to the configuration manager
+   - Click the plus sign in the top left corner and select 'Application' from the dropdown menu
+   - Put 'GUI' down as the name of the configuration
+   - For the module, select '17 version 17.0.1'
+   - For the -cp <no module' box, click the dropdown arrow and click 'gui' from the dropdown menu
+   - For the main class, select 'com.nsfdb.gui.main.DBMainWindow'
+   - Click 'Apply' and then 'OK'
+   - Now run the GUI configuration the same way you ran the API configuration.
+
+Now you're done! If both the API and GUI configurations are able to start successfully, then you'll see the GUI pop up after starting the GUI configuration (if the API is running in the background with no errors).
