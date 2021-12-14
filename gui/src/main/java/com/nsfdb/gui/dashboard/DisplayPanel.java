@@ -9,6 +9,8 @@ public class DisplayPanel extends JPanel {
 
     public DisplayPanel() {
         super();
+        // Container panel to hold the panels to show based on the buttons pressed on the navigation
+        // Ex. ClosurePanel, FamilyTreePanel, HealingPanel, LifeTablePanel, MonkeyTablePanel
         this.panels = panels;
         this.setLayout(new OverlayLayout(this));
         Dimension windowSize = new Dimension(600, 400);

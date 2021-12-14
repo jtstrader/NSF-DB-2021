@@ -1,6 +1,7 @@
 package com.nsfdb.gui.main;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.nsfdb.api.analytics.aggregations.FamilyTree;
 import com.nsfdb.gui.dashboard.*;
 
 import javax.swing.*;
@@ -18,41 +19,62 @@ public class DBMainWindow extends JFrame {
         // Application currently doesn't support resizing
         this.setResizable(false);
 
+        FamilyTree myTree = new FamilyTree();
+        myTree.create();
+
         // Build the Family Tree Panel
-        FamilyTreePanel treePanel = new FamilyTreePanel();
+        // This will be the default display so it will be enabled at start
+        FamilyTreePanel treePanel = new FamilyTreePanel(myTree);
         treePanel.setVisible(true);
         treePanel.setEnabled(true);
         //this.add(treePanel, BorderLayout.CENTER);
 
         // Build the life Panel
+        // This panel will be disabled at start so the FamilyTreePanel can be shown
+        // The navigation panel controls this
         LifeTablePanel lifePanel = new LifeTablePanel();
         lifePanel.setVisible(false);
         lifePanel.setEnabled(false);
 
         // Build the Closure Panel
+        // This panel will be disabled at start so the FamilyTreePanel can be shown
+        // The navigation panel controls this
         ClosurePanel closurePanel = new ClosurePanel();
         closurePanel.setVisible(false);
         closurePanel.setEnabled(false);
 
         //Build the Healing Panel
+        // This panel will be disabled at start so the FamilyTreePanel can be shown
+        // The navigation panel controls this
         HealingPanel healingPanel = new HealingPanel();
         healingPanel.setVisible(false);
         healingPanel.setEnabled(false);
 
-        // Build the Display Panel
+        // Build the Monkey Table Panel
+        // This panel will be disabled at start so the FamilyTreePanel can be shown
+        // The navigation panel controls this
+        MonkeyTablePanel monkeyPanel = new MonkeyTablePanel(myTree);
+        monkeyPanel.setVisible(false);
+        monkeyPanel.setEnabled(false);
+
+        // Adds that other displays to the DisplayPanel, which is where they will be displayed
         JPanel display = new DisplayPanel();
         display.add(treePanel);
         display.add(lifePanel);
         display.add(closurePanel);
         display.add(healingPanel);
+        display.add(monkeyPanel);
         this.add(display, BorderLayout.CENTER);
 
-        // An array list of the major panels to be added to the Navigation Panel
+        // An array list of the major panels to be sent to
+        // the NavigationPanel so that it can enable and display them
+        // based on the buttons pressed
         ArrayList<JPanel> panels = new ArrayList<>();
         panels.add(treePanel);
         panels.add(lifePanel);
         panels.add(closurePanel);
         panels.add(healingPanel);
+        panels.add(monkeyPanel);
 
         // Builds the Navigation Panel.
         NavigationPanel nav = new NavigationPanel(panels);
@@ -67,7 +89,7 @@ public class DBMainWindow extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                // Start up exceptions
+                // Sets the Appearance to that of Windows
                 try {
                     UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
                 } catch (ClassNotFoundException e) { // Exception

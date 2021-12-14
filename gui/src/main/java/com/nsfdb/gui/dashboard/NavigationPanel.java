@@ -34,7 +34,7 @@ public class NavigationPanel extends JPanel {
 
         // Creates a panel to contain the top level buttons and submenu buttons
         JPanel mainNav = new JPanel();
-        windowSize = new Dimension(120, 300);
+        //windowSize = new Dimension(120, 300);
         mainNav.setLayout(new OverlayLayout(mainNav));
         mainNav.setPreferredSize(windowSize);
         mainNav.setMaximumSize(windowSize);
@@ -42,9 +42,12 @@ public class NavigationPanel extends JPanel {
         mainNav.setBackground(Color.WHITE);
         mainNav.setOpaque(false);
 
+        // Creates the buttons that will show when clicking Monkeys
+        JPanel monkPopupNav = createMonkeyPopup(butPanel);
+        mainNav.add(monkPopupNav);
         // Creates the buttons that will be shown when clicking the top level Analytics button
-        JPanel AnalPopupNav = createAnalyticsPopup(butPanel);
-        mainNav.add(AnalPopupNav);
+        JPanel analPopupNav = createAnalyticsPopup(butPanel);
+        mainNav.add(analPopupNav);
 
         // Gets the images and resizes it so that it fits in the image Panel
         ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("logo.png"));
@@ -55,31 +58,41 @@ public class NavigationPanel extends JPanel {
         img.add(iconLabel);
 
 // Start of creating and adding top level buttons and adding to button panel ===========================================
-        JButton treeBut = new JButton("Family Tree");
-        treeBut.setBorderPainted(false);
-        treeBut.setFocusPainted(false);
-        treeBut.setFont(new Font("Arial", Font.PLAIN, 12));
-        treeBut.setBackground(Color.WHITE);
-        treeBut.setForeground(Color.BLACK);
-        treeBut.addChangeListener(new ChangeListener() {
+        JButton monkeyBut = new JButton("Monkeys");
+        monkeyBut.setBorderPainted(false);
+        monkeyBut.setFocusPainted(false);
+        monkeyBut.setFont(new Font("Arial", Font.PLAIN, 12));
+        monkeyBut.setBackground(Color.WHITE);
+        monkeyBut.setForeground(Color.BLACK);
+        monkeyBut.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                ButtonModel model = (ButtonModel) treeBut.getModel();
+                ButtonModel model = (ButtonModel) monkeyBut.getModel();
+                // Enables and Shows Monkey Buttons
+                // and Disables and Hides Main Buttons
                 if(model.isPressed()) {
                     //panelList.get(0).setVisible(true);
-                    setVisiblePanel(panelList.get(0));
+                    //setVisiblePanel(panelList.get(0));
+
+                    butPanel.setVisible(false);
+                    butPanel.setEnabled(false);
+
+                    monkPopupNav.setVisible(true);
+                    monkPopupNav.setEnabled(true);
+
+                    setPanelColor(new Color(253, 238, 229));
                 }
                 else if(model.isRollover()) {
-                    treeBut.setBackground(new Color(253,238,229));
-                    treeBut.setForeground(new Color(214, 79, 1));
+                    monkeyBut.setBackground(new Color(253,238,229));
+                    monkeyBut.setForeground(new Color(214, 79, 1));
                 }
                 else {
-                    treeBut.setBackground(Color.WHITE);
-                    treeBut.setForeground(Color.BLACK);
+                    monkeyBut.setBackground(Color.WHITE);
+                    monkeyBut.setForeground(Color.BLACK);
                 }
             }
         });
-        butPanel.add(treeBut);
+        butPanel.add(monkeyBut);
 
         JButton analBut = new JButton("Analytics");
         analBut.setBorderPainted(false);
@@ -91,12 +104,14 @@ public class NavigationPanel extends JPanel {
             @Override
             public void stateChanged(ChangeEvent e) {
                 ButtonModel model = (ButtonModel) analBut.getModel();
+                // Enables and Shows Analytic Buttons
+                // Disables and hides Main Buttons
                 if(model.isPressed()) {
                     butPanel.setVisible(false);
                     butPanel.setEnabled(false);
 
-                    AnalPopupNav.setVisible(true);
-                    AnalPopupNav.setEnabled(true);
+                    analPopupNav.setVisible(true);
+                    analPopupNav.setEnabled(true);
 
                     setPanelColor(new Color(253, 238, 229));
                 }
@@ -122,6 +137,14 @@ public class NavigationPanel extends JPanel {
             @Override
             public void stateChanged(ChangeEvent e) {
                 ButtonModel model = (ButtonModel) searchBut.getModel();
+                // Currently Not implemented
+                // Will be used to show Search Panel, which will have to be added to DisplayPanel
+                // so that it will be shown
+                // and the the array that is sent to NavigationPanel so it can be accessed here
+
+                // Example of enabling panel
+                // setVisiblePanel(panelList.get(index)); // index should be replaced by the index in the array
+
                 if(model.isPressed()) {
                     setVisiblePanel(null);
                 }
@@ -148,6 +171,121 @@ public class NavigationPanel extends JPanel {
         this.setBackground(color);
     }
 
+    private JPanel createMonkeyPopup(JPanel mainNav) {
+        // Creates the buttons for the Monkey submenu
+        JPanel popupNav = new JPanel();
+        popupNav.setVisible(false);
+        popupNav.setLayout(new GridLayout(6, 1, 0, 0));
+        popupNav.setPreferredSize(new Dimension(100, 300));
+        //popupNav.setBackground(Color.WHITE);
+        popupNav.setOpaque(false);
+
+        JButton familyTreeBut = new JButton("Family Tree");
+        familyTreeBut.setBorderPainted(false);
+        familyTreeBut.setFocusPainted(false);
+        familyTreeBut.setFont(new Font("Arial", Font.PLAIN, 12));
+        familyTreeBut.setBackground(new Color(253,238,229));
+        familyTreeBut.setForeground(new Color(214, 79, 1));
+        familyTreeBut.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                ButtonModel model = (ButtonModel) familyTreeBut.getModel();
+                // Enables and Shows the FamilyTreePanel
+                // Disable and Hides all the other display panels
+                if(model.isPressed()) {
+                    setVisiblePanel(panelList.get(0));
+
+//                    mainNav.setVisible(true);
+//                    mainNav.setEnabled(true);
+//
+//                    popupNav.setEnabled(false);
+//                    popupNav.setVisible(false);
+
+//                    setPanelColor(Color.WHITE);
+                }
+                else if(model.isRollover()) {
+                    familyTreeBut.setBackground(Color.WHITE);
+                    familyTreeBut.setForeground(Color.BLACK);
+                }
+                else {
+                    familyTreeBut.setBackground(new Color(253,238,229));
+                    familyTreeBut.setForeground(new Color(214, 79, 1));
+                }
+            }
+        });
+        popupNav.add(familyTreeBut);
+
+        JButton monkeyTable = new JButton("Monkey Table");
+        monkeyTable.setBorderPainted(false);
+        monkeyTable.setFocusPainted(false);
+        monkeyTable.setFont(new Font("Arial", Font.PLAIN, 12));
+        monkeyTable.setBackground(new Color(253, 238, 229));
+        monkeyTable.setForeground(new Color(214, 79, 1));
+        monkeyTable.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                ButtonModel model = (ButtonModel) monkeyTable.getModel();
+                /// Enables and Shows the MonkeyTablePanel
+                // Disable and Hides all the other display panels
+                if(model.isPressed()) {
+                    setVisiblePanel(panelList.get(4));
+
+//                    mainNav.setVisible(true);
+//                    mainNav.setEnabled(true);
+//
+//                    popupNav.setEnabled(false);
+//                    popupNav.setVisible(false);
+
+//                    setPanelColor(Color.WHITE);
+                }
+                else if(model.isRollover()) {
+                    monkeyTable.setBackground(Color.WHITE);
+                    monkeyTable.setForeground(Color.BLACK);
+                }
+                else {
+                    monkeyTable.setBackground(new Color(253, 238, 229));
+                    monkeyTable.setForeground(new Color(214, 79, 1));
+                }
+            }
+        });
+        popupNav.add(monkeyTable);
+
+        JButton backBut = new JButton("Back");
+        backBut.setBorderPainted(false);
+        backBut.setFocusPainted(false);
+        backBut.setFont(new Font("Arial", Font.PLAIN, 12));
+        backBut.setBackground(new Color(253,238,229));
+        backBut.setForeground(new Color(214, 79, 1));
+        backBut.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                ButtonModel model = (ButtonModel) backBut.getModel();
+                // Enables and Shows Main Navigation Buttons
+                // Disable and Hides the Monkey Buttons
+                if(model.isPressed()) {
+                    mainNav.setVisible(true);
+                    mainNav.setEnabled(true);
+
+                    popupNav.setEnabled(false);
+                    popupNav.setVisible(false);
+
+                    setPanelColor(Color.WHITE);
+                }
+                else if(model.isRollover()) {
+                    backBut.setBackground(Color.WHITE);
+                    backBut.setForeground(Color.BLACK);
+                }
+                else {
+                    backBut.setBackground(new Color(253,238,229));
+                    backBut.setForeground(new Color(214, 79, 1));
+                }
+            }
+        });
+        popupNav.add(backBut);
+
+        return popupNav;
+    }
+
     private JPanel createAnalyticsPopup(JPanel mainNav) {
         // Creates the buttons for the Analytics submenu
         JPanel popupNav = new JPanel();
@@ -167,16 +305,18 @@ public class NavigationPanel extends JPanel {
             @Override
             public void stateChanged(ChangeEvent e) {
                 ButtonModel model = (ButtonModel) lifeTableBut.getModel();
+                // Enables and Shows the Life Table Panel
+                // Disable and Hides all the other display panels
                 if(model.isPressed()) {
                     setVisiblePanel(panelList.get(1));
 
-                    mainNav.setVisible(true);
-                    mainNav.setEnabled(true);
+//                    mainNav.setVisible(true);
+//                    mainNav.setEnabled(true);
+//
+//                    popupNav.setEnabled(false);
+//                    popupNav.setVisible(false);
 
-                    popupNav.setEnabled(false);
-                    popupNav.setVisible(false);
-
-                    setPanelColor(Color.WHITE);
+//                    setPanelColor(Color.WHITE);
                 }
                 else if(model.isRollover()) {
                     lifeTableBut.setBackground(Color.WHITE);
@@ -200,16 +340,18 @@ public class NavigationPanel extends JPanel {
             @Override
             public void stateChanged(ChangeEvent e) {
                 ButtonModel model = (ButtonModel) suturesGraph.getModel();
+                // Enables and Shows the Suture Graph Panel(ClosurePanel)
+                // Disable and Hides all the other display panels
                 if(model.isPressed()) {
                     setVisiblePanel(panelList.get(2));
 
-                    mainNav.setVisible(true);
-                    mainNav.setEnabled(true);
+//                    mainNav.setVisible(true);
+//                    mainNav.setEnabled(true);
+//
+//                    popupNav.setEnabled(false);
+//                    popupNav.setVisible(false);
 
-                    popupNav.setEnabled(false);
-                    popupNav.setVisible(false);
-
-                    setPanelColor(Color.WHITE);
+//                    setPanelColor(Color.WHITE);
                 }
                 else if(model.isRollover()) {
                     suturesGraph.setBackground(Color.WHITE);
@@ -233,16 +375,18 @@ public class NavigationPanel extends JPanel {
             @Override
             public void stateChanged(ChangeEvent e) {
                 ButtonModel model = (ButtonModel) healingBut.getModel();
+                // Enables and Shows the Healing Graph Panel(HealingPanel)
+                // Disable and Hides all the other display panels
                 if(model.isPressed()) {
                     setVisiblePanel(panelList.get(3));
 
-                    mainNav.setVisible(true);
-                    mainNav.setEnabled(true);
+//                    mainNav.setVisible(true);
+//                    mainNav.setEnabled(true);
+//
+//                    popupNav.setEnabled(false);
+//                    popupNav.setVisible(false);
 
-                    popupNav.setEnabled(false);
-                    popupNav.setVisible(false);
-
-                    setPanelColor(Color.WHITE);
+//                    setPanelColor(Color.WHITE);
                 }
                 else if(model.isRollover()) {
                     healingBut.setBackground(Color.WHITE);
@@ -266,6 +410,8 @@ public class NavigationPanel extends JPanel {
             @Override
             public void stateChanged(ChangeEvent e) {
                 ButtonModel model = (ButtonModel) backBut.getModel();
+                // Enables and Shows Main Navigation Buttons
+                // Disable and Hides the Analytic Buttons
                 if(model.isPressed()) {
                     mainNav.setVisible(true);
                     mainNav.setEnabled(true);
@@ -291,6 +437,8 @@ public class NavigationPanel extends JPanel {
     }
 
     void setVisiblePanel(JPanel visiblePanel) {
+        // Enables and Shows the JPanel passed in
+        // and Disables and hides the other Display Panels
         for(JPanel pan:panelList) {
             pan.setVisible(false);
             pan.setEnabled(false);

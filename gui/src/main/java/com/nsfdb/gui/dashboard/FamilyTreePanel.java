@@ -73,7 +73,7 @@ public class FamilyTreePanel extends JPanel {
 
                 if (node == null) return;
                 detailsPanel.setMonkey(node.getMonkey());
-                bonePanel.setMonkey(node.getMonkey());
+
             }
         });
 
@@ -90,6 +90,7 @@ public class FamilyTreePanel extends JPanel {
         // create border for panels
         Border blackLine = BorderFactory.createLineBorder(Color.BLACK,1);
         detailsPanel.setBorder(blackLine);
+        //bonePanel.setBorder(blackLine);
 
         treePanel.add(treeView);
         dataPanel.add(detailsPanel,BorderLayout.NORTH);
