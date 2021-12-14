@@ -147,18 +147,20 @@ public class FamilyTreePanel extends JPanel {
         Icon unknownIcon;
 
         public MyRenderer() {
+            // Loads the image from Resources
             ImageIcon femaleImageIcon = new ImageIcon(getClass().getClassLoader().getResource("FemaleMonkey.png"));
             ImageIcon maleImageIcon = new ImageIcon(getClass().getClassLoader().getResource("MaleMonkey.png"));
             ImageIcon unknownImageIcon = new ImageIcon(getClass().getClassLoader().getResource("UnknownMonkey.png"));
 
+            // Sets as image and resizes it
             Image femaleImage = femaleImageIcon.getImage();
             Image maleImage = maleImageIcon.getImage();
             Image unknownImage = unknownImageIcon.getImage();
-
             femaleImage = femaleImage.getScaledInstance(16, 13, Image.SCALE_SMOOTH);
             maleImage = maleImage.getScaledInstance(16, 13, Image.SCALE_SMOOTH);
             unknownImage = unknownImage.getScaledInstance(16, 13, Image.SCALE_SMOOTH);
 
+            // Sets the resized image as an icon
             femaleIcon = new ImageIcon(femaleImage);
             maleIcon = new ImageIcon(maleImage);
             unknownIcon = new ImageIcon(unknownImage);
@@ -169,6 +171,7 @@ public class FamilyTreePanel extends JPanel {
                                                     boolean leaf, int row, boolean hasFocus) {
             super.getTreeCellRendererComponent(tree, value, sel,
                                             expanded, leaf, row, hasFocus);
+            // Sets the icon based on gender
             if(genderOf(value).equals("NULL")) {
                 setIcon(unknownIcon);
             }
@@ -182,7 +185,8 @@ public class FamilyTreePanel extends JPanel {
             return this;
         }
 
-        private String genderOf(Object value) {
+        // Gets the Monkey Object and returns its gender
+        protected String genderOf(Object value) {
             DefaultMutableTreeNode node = (DefaultMutableTreeNode) value;
             FamilyTreeNode familyTreeNode = (FamilyTreeNode) (node);
 
