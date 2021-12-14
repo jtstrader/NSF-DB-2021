@@ -4,45 +4,29 @@ import com.nsfdb.api.models.Monkey;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseMotionAdapter;
 
 public class BoneDataPanel extends JPanel {
     Monkey monkey;
-    JLabel idLabel;
-    JLabel birthLabel;
-    JLabel deathLabel;
-    JLabel genderLabel;
+    JLabel coronalLabel;
+    JLabel saggitalLabel;
+    JLabel lambodialLabel;
+    JLabel humeralLabel;
     JLabel momLabel;
     JLabel statusLabel;
 
     public void setMonkey(Monkey monkey) {
         this.monkey = monkey;
-        String id = "Animal ID: " + monkey.getAnimal_id();
-        idLabel.setText(id);
+        String id = "Coronal suture: 4";
+        coronalLabel.setText(id);
 
-        String birth = "Date of Birth: " + monkey.getDate_of_birth();
-        birthLabel.setText(birth);
+        String birth = "Sagittal suture: 4";
+        saggitalLabel.setText(birth);
 
-        System.out.println(monkey.getDate_of_death());
-        if(monkey.getDate_of_death() == null) {
-            deathLabel.setVisible(false);
-            this.repaint();
-        }
-        else {
-            String death = "Date of Death: " + monkey.getDate_of_death();
-            deathLabel.setText(death);
-            deathLabel.setVisible(true);
-        }
-        String gender = "Gender: " + monkey.getSex();
-        genderLabel.setText(gender);
+        String gender = "Lamboidal suture: 4";
+        lambodialLabel.setText(gender);
 
-        String momId = "Mom: " + monkey.getBehavior_mom();
-        momLabel.setText(momId);
-
-        String status = "Status: " + monkey.getStatus();
-        statusLabel.setText(status);
+        String momId = "Humeral head: 3";
+        humeralLabel.setText(momId);
     }
 
     public BoneDataPanel() {
@@ -52,60 +36,31 @@ public class BoneDataPanel extends JPanel {
         this.setMaximumSize(windowSize);
         this.setMinimumSize(windowSize);
 
-        String id = "Bones";
-        String birth = "Bones";
-        String death = null;
-        String gender = "Bones";
-        String momId = "Bones";
-        String status = "Bones";
+        String coronalSuture = "Coronal suture";
+        String saggitalSuture = "Saggital suture";
+        String lambodialSuture = "lambodial suture";
+        String humeralHead = "Humeral Head";
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         // Creates label to display the ID
-        idLabel = new JLabel(id);
-        idLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.add(idLabel);
+        coronalLabel = new JLabel(coronalSuture);
+        coronalLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.add(coronalLabel);
 
         // Creates label to display the Date of Birth
-        birthLabel = new JLabel(birth);
-        birthLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.add(birthLabel);
+        saggitalLabel = new JLabel(saggitalSuture);
+        saggitalLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.add(saggitalLabel);
 
         // Creates label to display the Date of Death
-        deathLabel = new JLabel(death);
-        deathLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.add(deathLabel);
+        lambodialLabel = new JLabel(lambodialSuture);
+        lambodialLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.add(lambodialLabel);
 
         // Creates label to display the Gender
-        genderLabel = new JLabel(gender);
-        genderLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.add(genderLabel);
-
-        // Creates label to display the Mom's ID
-        momLabel = new JLabel(momId);
-        momLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        momLabel.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                System.out.println("Mom Clicked");
-            }
-        });
-        // Changes mouse cursor on hover.
-        momLabel.addMouseMotionListener(new MouseMotionAdapter() {
-            @Override
-            public void mouseMoved(MouseEvent e) {
-                super.mouseMoved(e);
-                momLabel.setCursor(Cursor.getPredefinedCursor(
-                        Cursor.HAND_CURSOR));
-
-            }
-        });
-        this.add(momLabel);
-
-        // Creates label to display the Status
-        statusLabel = new JLabel(status);
-        statusLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.add(statusLabel);
+        humeralLabel = new JLabel(humeralHead);
+        humeralLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.add(humeralLabel);
     }
 }
