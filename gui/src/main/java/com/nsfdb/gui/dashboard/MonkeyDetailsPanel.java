@@ -32,9 +32,9 @@ public class MonkeyDetailsPanel extends JPanel {
         idInfo.setText(id2);
         idLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         idInfo.setFont(new Font("Arial", Font.PLAIN, 12));
-        idLabel.setBackground(new Color(220, 220, 220));
+        //idLabel.setBackground(new Color(220, 220, 220));
         idLabel.setOpaque(true);
-        idInfo.setBackground(new Color(220, 220, 220));
+        //idInfo.setBackground(new Color(220, 220, 220));
         idInfo.setOpaque(true);
 
         String birth = " Date of Birth: ";
@@ -45,12 +45,12 @@ public class MonkeyDetailsPanel extends JPanel {
         birthInfo.setFont(new Font("Arial", Font.PLAIN, 12));
 
         //System.out.println(monkey.getDate_of_death());
-        if(monkey.getDate_of_death() == null) {
+        //if(monkey.getDate_of_death() == null) {
             deathLabel.setVisible(false);
             deathInfo.setVisible(false);
             this.repaint();
-        }
-        else {
+        //}
+        //else {
             String death = " Date of Death: ";
             String death2 = monkey.getDate_of_death() + " ";
             deathLabel.setText(death);
@@ -59,11 +59,11 @@ public class MonkeyDetailsPanel extends JPanel {
             deathInfo.setFont(new Font("Arial", Font.PLAIN, 12));
             deathLabel.setVisible(true);
             deathInfo.setVisible(true);
-            deathLabel.setBackground(new Color(220, 220, 220));
+            //deathLabel.setBackground(new Color(220, 220, 220));
             deathLabel.setOpaque(true);
-            deathInfo.setBackground(new Color(220, 220, 220));
+            //deathInfo.setBackground(new Color(220, 220, 220));
             deathInfo.setOpaque(true);
-        }
+        //}
         String gender = " Gender: ";
         String gender2 = monkey.getSex();
         genderLabel.setText(gender);
@@ -77,9 +77,9 @@ public class MonkeyDetailsPanel extends JPanel {
         momInfo.setText(momId2);
         momLabel.setFont(new Font("Arial", Font.PLAIN, 12));
         momInfo.setFont(new Font("Arial", Font.PLAIN, 12));
-        momLabel.setBackground(new Color(220, 220, 220));
+        //momLabel.setBackground(new Color(220, 220, 220));
         momLabel.setOpaque(true);
-        momInfo.setBackground(new Color(220, 220, 220));
+        //momInfo.setBackground(new Color(220, 220, 220));
         momInfo.setOpaque(true);
 
         String status = " Status: ";
