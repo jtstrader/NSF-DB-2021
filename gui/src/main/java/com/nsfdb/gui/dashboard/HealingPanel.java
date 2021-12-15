@@ -14,9 +14,14 @@ public class HealingPanel extends JPanel {
         this.setOpaque(false);
         this.setLayout(new SpringLayout());
         //ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("logo.png"));
-        BufferedImage bImg = ImageIO.read(getClass().getClassLoader().getResource("bone.PNG"));
-        Image img = bImg.getScaledInstance(600, 400, Image.SCALE_SMOOTH);
-        JLabel iconLabel = new JLabel(new ImageIcon(img));
-        this.add(iconLabel);
+        try {
+            BufferedImage bImg = ImageIO.read(getClass().getClassLoader().getResource("bone.PNG"));
+            Image img = bImg.getScaledInstance(600, 400, Image.SCALE_SMOOTH);
+            JLabel iconLabel = new JLabel(new ImageIcon(img));
+            this.add(iconLabel);
+        }
+        catch (IllegalArgumentException e) {
+            System.out.println("Missing graph image");
+        }
     }
 }

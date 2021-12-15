@@ -50,12 +50,17 @@ public class NavigationPanel extends JPanel {
         mainNav.add(analPopupNav);
 
         // Gets the images and resizes it so that it fits in the image Panel
-        ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("logo.png"));
-        Image image = icon.getImage();
-        image = image.getScaledInstance(75, 75, Image.SCALE_SMOOTH);
-        icon = new ImageIcon(image);
-        JLabel iconLabel = new JLabel(icon);
-        img.add(iconLabel);
+        try {
+            ImageIcon icon = new ImageIcon(getClass().getClassLoader().getResource("logo.png"));
+            Image image = icon.getImage();
+            image = image.getScaledInstance(75, 75, Image.SCALE_SMOOTH);
+            icon = new ImageIcon(image);
+            JLabel iconLabel = new JLabel(icon);
+            img.add(iconLabel);
+        }
+        catch (NullPointerException e) {
+            System.out.println("Icon Resources are missing");
+        }
 
 // Start of creating and adding top level buttons and adding to button panel ===========================================
         JButton monkeyBut = new JButton("Monkeys");
