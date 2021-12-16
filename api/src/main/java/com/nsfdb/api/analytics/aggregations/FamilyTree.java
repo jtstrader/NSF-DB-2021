@@ -165,7 +165,6 @@ public class FamilyTree {
     }
     private void printTree(FamilyTreeNode[] root) {
         System.out.println(root[0].monkey);
-        System.out.println(root[0].monkey.getDate_of_death());
         if(root[0].child[0] != null)
             printTree(root[0].child);
 

@@ -28,7 +28,7 @@ public class DBMainWindow extends JFrame {
 
         FamilyTree myTree = new FamilyTree();
         myTree.create();
-        myTree.printTree();
+        //myTree.printTree();
 
         // Build the Family Tree Panel
         // This will be the default display so it will be enabled at start
