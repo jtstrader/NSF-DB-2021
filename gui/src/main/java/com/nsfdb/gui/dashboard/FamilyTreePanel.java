@@ -145,22 +145,27 @@ public class FamilyTreePanel extends JPanel {
 
         public MyRenderer() {
             // Loads the image from Resources
-            ImageIcon femaleImageIcon = new ImageIcon(getClass().getClassLoader().getResource("FemaleMonkey.png"));
-            ImageIcon maleImageIcon = new ImageIcon(getClass().getClassLoader().getResource("MaleMonkey.png"));
-            ImageIcon unknownImageIcon = new ImageIcon(getClass().getClassLoader().getResource("UnknownMonkey.png"));
+            try {
+                ImageIcon femaleImageIcon = new ImageIcon(getClass().getClassLoader().getResource("FemaleMonkey.png"));
+                ImageIcon maleImageIcon = new ImageIcon(getClass().getClassLoader().getResource("MaleMonkey.png"));
+                ImageIcon unknownImageIcon = new ImageIcon(getClass().getClassLoader().getResource("UnknownMonkey.png"));
 
-            // Sets as image and resizes it
-            Image femaleImage = femaleImageIcon.getImage();
-            Image maleImage = maleImageIcon.getImage();
-            Image unknownImage = unknownImageIcon.getImage();
-            femaleImage = femaleImage.getScaledInstance(16, 13, Image.SCALE_SMOOTH);
-            maleImage = maleImage.getScaledInstance(16, 13, Image.SCALE_SMOOTH);
-            unknownImage = unknownImage.getScaledInstance(16, 13, Image.SCALE_SMOOTH);
+                // Sets as image and resizes it
+                Image femaleImage = femaleImageIcon.getImage();
+                Image maleImage = maleImageIcon.getImage();
+                Image unknownImage = unknownImageIcon.getImage();
+                femaleImage = femaleImage.getScaledInstance(16, 13, Image.SCALE_SMOOTH);
+                maleImage = maleImage.getScaledInstance(16, 13, Image.SCALE_SMOOTH);
+                unknownImage = unknownImage.getScaledInstance(16, 13, Image.SCALE_SMOOTH);
 
-            // Sets the resized image as an icon
-            femaleIcon = new ImageIcon(femaleImage);
-            maleIcon = new ImageIcon(maleImage);
-            unknownIcon = new ImageIcon(unknownImage);
+                // Sets the resized image as an icon
+                femaleIcon = new ImageIcon(femaleImage);
+                maleIcon = new ImageIcon(maleImage);
+                unknownIcon = new ImageIcon(unknownImage);
+            }
+            catch(NullPointerException e) {
+                System.out.println("Icon Resources are missing");
+            }
         }
 
         @Override

@@ -20,8 +20,13 @@ public class DBMainWindow extends JFrame {
         this.setResizable(false);
 
         // Sets Application Icon
-        Image icon = new ImageIcon(getClass().getClassLoader().getResource("logo.png")).getImage();
-        this.setIconImage(icon);
+        try {
+            Image icon = new ImageIcon(getClass().getClassLoader().getResource("logo.png")).getImage();
+            this.setIconImage(icon);
+        }
+        catch (NullPointerException e) {
+            System.out.println("Icon Resources are missing");
+        }
 
         FamilyTree myTree = new FamilyTree();
         myTree.create();
