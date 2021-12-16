@@ -6,8 +6,6 @@ import com.nsfdb.gui.dashboard.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.ExecutionException;
@@ -30,6 +28,7 @@ public class DBMainWindow extends JFrame {
 
         FamilyTree myTree = new FamilyTree();
         myTree.create();
+        myTree.printTree();
 
         // Build the Family Tree Panel
         // This will be the default display so it will be enabled at start

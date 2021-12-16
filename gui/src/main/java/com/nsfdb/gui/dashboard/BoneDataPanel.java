@@ -11,8 +11,6 @@ public class BoneDataPanel extends JPanel {
     JLabel saggitalLabel;
     JLabel lambodialLabel;
     JLabel humeralLabel;
-    JLabel momLabel;
-    JLabel statusLabel;
 
     public void setMonkey(Monkey monkey) {
         this.monkey = monkey;

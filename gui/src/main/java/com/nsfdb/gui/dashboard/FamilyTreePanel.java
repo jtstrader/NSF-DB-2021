@@ -3,7 +3,6 @@ package com.nsfdb.gui.dashboard;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.nsfdb.api.analytics.aggregations.FamilyTree;
 import com.nsfdb.api.analytics.aggregations.FamilyTreeNode;
-import com.nsfdb.api.models.Monkey;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -34,9 +33,6 @@ public class FamilyTreePanel extends JPanel {
 
         //DefaultMutableTreeNode top = new DefaultMutableTreeNode("Monkeys");
         //FamilyTreeNode top = new FamilyTreeNode(new Monkey());
-        Monkey fakeMonkey = new Monkey();
-        fakeMonkey.setAnimal_id("Monkeys");
-        FamilyTreeNode top = new FamilyTreeNode(fakeMonkey);
 
         //viewTest(top); // Tests the tree and the scroll feature
 
