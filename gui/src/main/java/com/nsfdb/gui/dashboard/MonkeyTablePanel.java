@@ -2,7 +2,6 @@ package com.nsfdb.gui.dashboard;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.nsfdb.api.analytics.aggregations.FamilyTree;
 import com.nsfdb.api.analytics.aggregations.FamilyTreeNode;
-import com.nsfdb.api.analytics.aggregations.LifeTable;
 
 import javax.swing.*;
 import java.util.ArrayList;
