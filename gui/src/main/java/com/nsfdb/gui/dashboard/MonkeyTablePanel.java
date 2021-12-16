@@ -12,7 +12,6 @@ public class MonkeyTablePanel extends JPanel {
 
     public MonkeyTablePanel(FamilyTree myTree) throws JsonProcessingException, InterruptedException {
         // Creates a 2D array from the FamilyTree class and adds it to a JTable
-        LifeTable tableData = new LifeTable();
         String columns[] = {"Animal ID", "Date of Birth", "Date of Death", "Gender", "Mom", "Status"};
 
         ArrayList<FamilyTreeNode[]> monkeyList = myTree.getMonkeyList();
