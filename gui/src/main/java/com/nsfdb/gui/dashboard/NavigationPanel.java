@@ -268,6 +268,8 @@ public class NavigationPanel extends JPanel {
                 // Enables and Shows Main Navigation Buttons
                 // Disable and Hides the Monkey Buttons
                 if(model.isPressed()) {
+                    setVisiblePanel(panelList.get(0));
+
                     mainNav.setVisible(true);
                     mainNav.setEnabled(true);
 
@@ -418,6 +420,8 @@ public class NavigationPanel extends JPanel {
                 // Enables and Shows Main Navigation Buttons
                 // Disable and Hides the Analytic Buttons
                 if(model.isPressed()) {
+                    setVisiblePanel(panelList.get(0));
+
                     mainNav.setVisible(true);
                     mainNav.setEnabled(true);
 
