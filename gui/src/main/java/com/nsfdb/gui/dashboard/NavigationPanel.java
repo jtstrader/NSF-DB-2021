@@ -10,6 +10,17 @@ import java.util.ArrayList;
 public class NavigationPanel extends JPanel {
     ArrayList<JPanel> panelList;
     int PANEL_WIDTH = 120;
+    // Change colors main buttons
+    final Color NORM_BACK_COLOR = Color.WHITE;
+    final Color NORM_TEXT_COLOR = Color.BLACK;
+    final Color HOVER_BACK_COLOR = new Color(253,238,229);
+    final Color HOVER_TEXT_COLOR = new Color(214, 79, 1);
+    //Change colors of secondary buttons
+    final Color NORM_BACK_COLOR_SECONDARY = new Color(253,238,229);
+    final Color NORM_TEXT_COLOR_SECONDARY = new Color(214, 79, 1);
+    final Color HOVER_BACK_COLOR_SECONDARY = Color.WHITE;
+    final Color HOVER_TEXT_COLOR_SECONDARY = Color.BLACK;
+
     public NavigationPanel(ArrayList<JPanel> panelList) throws IOException {
         this.panelList = panelList;
         //this.setLayout(null);
@@ -18,7 +29,7 @@ public class NavigationPanel extends JPanel {
         this.setPreferredSize(windowSize);
         this.setMaximumSize(windowSize);
         this.setMinimumSize(windowSize);
-        this.setBackground(Color.WHITE);
+        this.setBackground(NORM_BACK_COLOR);
         this.setOpaque(true);
 
         // Creates a Panel for the top level buttons
@@ -39,7 +50,7 @@ public class NavigationPanel extends JPanel {
         mainNav.setPreferredSize(windowSize);
         mainNav.setMaximumSize(windowSize);
         mainNav.setMinimumSize(windowSize);
-        mainNav.setBackground(Color.WHITE);
+        mainNav.setBackground(NORM_BACK_COLOR);
         mainNav.setOpaque(false);
 
         // Creates the buttons that will show when clicking Monkeys
@@ -67,8 +78,8 @@ public class NavigationPanel extends JPanel {
         monkeyBut.setBorderPainted(false);
         monkeyBut.setFocusPainted(false);
         monkeyBut.setFont(new Font("Arial", Font.PLAIN, 12));
-        monkeyBut.setBackground(Color.WHITE);
-        monkeyBut.setForeground(Color.BLACK);
+        monkeyBut.setBackground(NORM_BACK_COLOR);
+        monkeyBut.setForeground(NORM_TEXT_COLOR);
         monkeyBut.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -85,15 +96,15 @@ public class NavigationPanel extends JPanel {
                     monkPopupNav.setVisible(true);
                     monkPopupNav.setEnabled(true);
 
-                    setPanelColor(new Color(253, 238, 229));
+                    setPanelColor(NORM_BACK_COLOR_SECONDARY);
                 }
                 else if(model.isRollover()) {
-                    monkeyBut.setBackground(new Color(253,238,229));
-                    monkeyBut.setForeground(new Color(214, 79, 1));
+                    monkeyBut.setBackground(HOVER_BACK_COLOR);
+                    monkeyBut.setForeground(HOVER_TEXT_COLOR);
                 }
                 else {
-                    monkeyBut.setBackground(Color.WHITE);
-                    monkeyBut.setForeground(Color.BLACK);
+                    monkeyBut.setBackground(NORM_BACK_COLOR);
+                    monkeyBut.setForeground(NORM_TEXT_COLOR);
                 }
             }
         });
@@ -103,8 +114,8 @@ public class NavigationPanel extends JPanel {
         analBut.setBorderPainted(false);
         analBut.setFocusPainted(false);
         analBut.setFont(new Font("Arial", Font.PLAIN, 12));
-        analBut.setBackground(Color.WHITE);
-        analBut.setForeground(Color.BLACK);
+        analBut.setBackground(NORM_BACK_COLOR);
+        analBut.setForeground(NORM_TEXT_COLOR);
         analBut.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -118,15 +129,15 @@ public class NavigationPanel extends JPanel {
                     analPopupNav.setVisible(true);
                     analPopupNav.setEnabled(true);
 
-                    setPanelColor(new Color(253, 238, 229));
+                    setPanelColor(NORM_BACK_COLOR_SECONDARY);
                 }
                 else if(model.isRollover()) {
-                    analBut.setBackground(new Color(253, 238, 229));
-                    analBut.setForeground(new Color(214, 79, 1));
+                    analBut.setBackground(HOVER_BACK_COLOR);
+                    analBut.setForeground(HOVER_TEXT_COLOR);
                 }
                 else {
-                    analBut.setBackground(Color.WHITE);
-                    analBut.setForeground(Color.BLACK);
+                    analBut.setBackground(NORM_BACK_COLOR);
+                    analBut.setForeground(NORM_TEXT_COLOR);
                 }
             }
         });
@@ -136,8 +147,8 @@ public class NavigationPanel extends JPanel {
         searchBut.setBorderPainted(false);
         searchBut.setFocusPainted(false);
         searchBut.setFont(new Font("Arial", Font.PLAIN, 12));
-        searchBut.setBackground(Color.WHITE);
-        searchBut.setForeground(Color.BLACK);
+        searchBut.setBackground(NORM_BACK_COLOR);
+        searchBut.setForeground(NORM_TEXT_COLOR);
         searchBut.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -151,15 +162,19 @@ public class NavigationPanel extends JPanel {
                 // setVisiblePanel(panelList.get(index)); // index should be replaced by the index in the array
 
                 if(model.isPressed()) {
-                    setVisiblePanel(null);
+                    setVisiblePanel(null); // Replace null with panelList.get(I) where I is index of search panel
+                    // UNCOMMENT when button is implemented
+                    //butPanel.setVisible(false);
+                    //butPanel.setEnabled(false);
+
                 }
                 else if(model.isRollover()) {
-                    searchBut.setBackground(new Color(253,238,229));
-                    searchBut.setForeground(new Color(214, 79, 1));
+                    searchBut.setBackground(HOVER_BACK_COLOR);
+                    searchBut.setForeground(HOVER_TEXT_COLOR);
                 }
                 else {
-                    searchBut.setBackground(Color.WHITE);
-                    searchBut.setForeground(Color.BLACK);
+                    searchBut.setBackground(NORM_BACK_COLOR);
+                    searchBut.setForeground(NORM_TEXT_COLOR);
                 }
             }
         });
@@ -189,8 +204,8 @@ public class NavigationPanel extends JPanel {
         familyTreeBut.setBorderPainted(false);
         familyTreeBut.setFocusPainted(false);
         familyTreeBut.setFont(new Font("Arial", Font.PLAIN, 12));
-        familyTreeBut.setBackground(new Color(253,238,229));
-        familyTreeBut.setForeground(new Color(214, 79, 1));
+        familyTreeBut.setBackground(NORM_BACK_COLOR_SECONDARY);
+        familyTreeBut.setForeground(NORM_TEXT_COLOR_SECONDARY);
         familyTreeBut.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -209,12 +224,12 @@ public class NavigationPanel extends JPanel {
 //                    setPanelColor(Color.WHITE);
                 }
                 else if(model.isRollover()) {
-                    familyTreeBut.setBackground(Color.WHITE);
-                    familyTreeBut.setForeground(Color.BLACK);
+                    familyTreeBut.setBackground(HOVER_BACK_COLOR_SECONDARY);
+                    familyTreeBut.setForeground(HOVER_TEXT_COLOR_SECONDARY);
                 }
                 else {
-                    familyTreeBut.setBackground(new Color(253,238,229));
-                    familyTreeBut.setForeground(new Color(214, 79, 1));
+                    familyTreeBut.setBackground(NORM_BACK_COLOR_SECONDARY);
+                    familyTreeBut.setForeground(NORM_TEXT_COLOR_SECONDARY);
                 }
             }
         });
@@ -224,8 +239,8 @@ public class NavigationPanel extends JPanel {
         monkeyTable.setBorderPainted(false);
         monkeyTable.setFocusPainted(false);
         monkeyTable.setFont(new Font("Arial", Font.PLAIN, 12));
-        monkeyTable.setBackground(new Color(253, 238, 229));
-        monkeyTable.setForeground(new Color(214, 79, 1));
+        monkeyTable.setBackground(NORM_BACK_COLOR_SECONDARY);
+        monkeyTable.setForeground(NORM_TEXT_COLOR_SECONDARY);
         monkeyTable.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -244,12 +259,12 @@ public class NavigationPanel extends JPanel {
 //                    setPanelColor(Color.WHITE);
                 }
                 else if(model.isRollover()) {
-                    monkeyTable.setBackground(Color.WHITE);
-                    monkeyTable.setForeground(Color.BLACK);
+                    monkeyTable.setBackground(HOVER_BACK_COLOR_SECONDARY);
+                    monkeyTable.setForeground(HOVER_TEXT_COLOR_SECONDARY);
                 }
                 else {
-                    monkeyTable.setBackground(new Color(253, 238, 229));
-                    monkeyTable.setForeground(new Color(214, 79, 1));
+                    monkeyTable.setBackground(NORM_BACK_COLOR_SECONDARY);
+                    monkeyTable.setForeground(NORM_TEXT_COLOR_SECONDARY);
                 }
             }
         });
@@ -259,8 +274,8 @@ public class NavigationPanel extends JPanel {
         backBut.setBorderPainted(false);
         backBut.setFocusPainted(false);
         backBut.setFont(new Font("Arial", Font.PLAIN, 12));
-        backBut.setBackground(new Color(253,238,229));
-        backBut.setForeground(new Color(214, 79, 1));
+        backBut.setBackground(NORM_BACK_COLOR_SECONDARY);
+        backBut.setForeground(NORM_TEXT_COLOR_SECONDARY);
         backBut.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -268,21 +283,23 @@ public class NavigationPanel extends JPanel {
                 // Enables and Shows Main Navigation Buttons
                 // Disable and Hides the Monkey Buttons
                 if(model.isPressed()) {
+                    setVisiblePanel(panelList.get(0));
+
                     mainNav.setVisible(true);
                     mainNav.setEnabled(true);
 
                     popupNav.setEnabled(false);
                     popupNav.setVisible(false);
 
-                    setPanelColor(Color.WHITE);
+                    setPanelColor(NORM_BACK_COLOR);
                 }
                 else if(model.isRollover()) {
-                    backBut.setBackground(Color.WHITE);
-                    backBut.setForeground(Color.BLACK);
+                    backBut.setBackground(HOVER_BACK_COLOR_SECONDARY);
+                    backBut.setForeground(HOVER_TEXT_COLOR_SECONDARY);
                 }
                 else {
-                    backBut.setBackground(new Color(253,238,229));
-                    backBut.setForeground(new Color(214, 79, 1));
+                    backBut.setBackground(NORM_BACK_COLOR_SECONDARY);
+                    backBut.setForeground(NORM_TEXT_COLOR_SECONDARY);
                 }
             }
         });
@@ -304,8 +321,8 @@ public class NavigationPanel extends JPanel {
         lifeTableBut.setBorderPainted(false);
         lifeTableBut.setFocusPainted(false);
         lifeTableBut.setFont(new Font("Arial", Font.PLAIN, 12));
-        lifeTableBut.setBackground(new Color(253,238,229));
-        lifeTableBut.setForeground(new Color(214, 79, 1));
+        lifeTableBut.setBackground(NORM_BACK_COLOR_SECONDARY);
+        lifeTableBut.setForeground(NORM_TEXT_COLOR_SECONDARY);
         lifeTableBut.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -324,12 +341,12 @@ public class NavigationPanel extends JPanel {
 //                    setPanelColor(Color.WHITE);
                 }
                 else if(model.isRollover()) {
-                    lifeTableBut.setBackground(Color.WHITE);
-                    lifeTableBut.setForeground(Color.BLACK);
+                    lifeTableBut.setBackground(HOVER_BACK_COLOR_SECONDARY);
+                    lifeTableBut.setForeground(HOVER_TEXT_COLOR_SECONDARY);
                 }
                 else {
-                    lifeTableBut.setBackground(new Color(253,238,229));
-                    lifeTableBut.setForeground(new Color(214, 79, 1));
+                    lifeTableBut.setBackground(NORM_BACK_COLOR_SECONDARY);
+                    lifeTableBut.setForeground(NORM_TEXT_COLOR_SECONDARY);
                 }
             }
         });
@@ -339,8 +356,8 @@ public class NavigationPanel extends JPanel {
         suturesGraph.setBorderPainted(false);
         suturesGraph.setFocusPainted(false);
         suturesGraph.setFont(new Font("Arial", Font.PLAIN, 12));
-        suturesGraph.setBackground(new Color(253, 238, 229));
-        suturesGraph.setForeground(new Color(214, 79, 1));
+        suturesGraph.setBackground(NORM_BACK_COLOR_SECONDARY);
+        suturesGraph.setForeground(NORM_TEXT_COLOR_SECONDARY);
         suturesGraph.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -359,12 +376,12 @@ public class NavigationPanel extends JPanel {
 //                    setPanelColor(Color.WHITE);
                 }
                 else if(model.isRollover()) {
-                    suturesGraph.setBackground(Color.WHITE);
-                    suturesGraph.setForeground(Color.BLACK);
+                    suturesGraph.setBackground(HOVER_BACK_COLOR_SECONDARY);
+                    suturesGraph.setForeground(HOVER_TEXT_COLOR_SECONDARY);
                 }
                 else {
-                    suturesGraph.setBackground(new Color(253, 238, 229));
-                    suturesGraph.setForeground(new Color(214, 79, 1));
+                    suturesGraph.setBackground(NORM_BACK_COLOR_SECONDARY);
+                    suturesGraph.setForeground(NORM_TEXT_COLOR_SECONDARY);
                 }
             }
         });
@@ -374,8 +391,8 @@ public class NavigationPanel extends JPanel {
         healingBut.setBorderPainted(false);
         healingBut.setFocusPainted(false);
         healingBut.setFont(new Font("Arial", Font.PLAIN, 12));
-        healingBut.setBackground(new Color(253,238,229));
-        healingBut.setForeground(new Color(214, 79, 1));
+        healingBut.setBackground(NORM_BACK_COLOR_SECONDARY);
+        healingBut.setForeground(NORM_TEXT_COLOR_SECONDARY);
         healingBut.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -394,12 +411,12 @@ public class NavigationPanel extends JPanel {
 //                    setPanelColor(Color.WHITE);
                 }
                 else if(model.isRollover()) {
-                    healingBut.setBackground(Color.WHITE);
-                    healingBut.setForeground(Color.BLACK);
+                    healingBut.setBackground(HOVER_BACK_COLOR_SECONDARY);
+                    healingBut.setForeground(HOVER_TEXT_COLOR_SECONDARY);
                 }
                 else {
-                    healingBut.setBackground(new Color(253,238,229));
-                    healingBut.setForeground(new Color(214, 79, 1));
+                    healingBut.setBackground(NORM_BACK_COLOR_SECONDARY);
+                    healingBut.setForeground(NORM_TEXT_COLOR_SECONDARY);
                 }
             }
         });
@@ -409,8 +426,8 @@ public class NavigationPanel extends JPanel {
         backBut.setBorderPainted(false);
         backBut.setFocusPainted(false);
         backBut.setFont(new Font("Arial", Font.PLAIN, 12));
-        backBut.setBackground(new Color(253,238,229));
-        backBut.setForeground(new Color(214, 79, 1));
+        backBut.setBackground(NORM_BACK_COLOR_SECONDARY);
+        backBut.setForeground(NORM_TEXT_COLOR_SECONDARY);
         backBut.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -418,21 +435,23 @@ public class NavigationPanel extends JPanel {
                 // Enables and Shows Main Navigation Buttons
                 // Disable and Hides the Analytic Buttons
                 if(model.isPressed()) {
+                    setVisiblePanel(panelList.get(0));
+
                     mainNav.setVisible(true);
                     mainNav.setEnabled(true);
 
                     popupNav.setEnabled(false);
                     popupNav.setVisible(false);
 
-                    setPanelColor(Color.WHITE);
+                    setPanelColor(NORM_BACK_COLOR);
                 }
                 else if(model.isRollover()) {
-                    backBut.setBackground(Color.WHITE);
-                    backBut.setForeground(Color.BLACK);
+                    backBut.setBackground(HOVER_BACK_COLOR_SECONDARY);
+                    backBut.setForeground(HOVER_TEXT_COLOR_SECONDARY);
                 }
                 else {
-                    backBut.setBackground(new Color(253,238,229));
-                    backBut.setForeground(new Color(214, 79, 1));
+                    backBut.setBackground(NORM_BACK_COLOR_SECONDARY);
+                    backBut.setForeground(NORM_TEXT_COLOR_SECONDARY);
                 }
             }
         });

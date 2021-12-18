@@ -90,7 +90,10 @@ public class FamilyTreePanel extends JPanel {
         Border grayLine = BorderFactory.createLineBorder(new Color(130, 135, 144),1);
         Border topAndBotBorder = new CompoundBorder(empty, grayLine);
         detailsPanel.setBorder(topAndBotBorder);
-        bonePanel.setBorder(topAndBotBorder);
+
+        empty = BorderFactory.createEmptyBorder(-1, -1, 0, -1);
+        Border botBorder = new CompoundBorder(empty, grayLine);
+        bonePanel.setBorder(botBorder);
 
         treePanel.add(treeView);
         dataPanel.add(detailsPanel,BorderLayout.NORTH);
